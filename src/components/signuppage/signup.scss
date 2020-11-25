@@ -1,0 +1,85 @@
+.signupflexcontainer {
+    display: flex;
+    width: 100%;
+  }
+  
+  .signupformerror {
+    color: red;
+    font-size: 13px;
+  }
+  
+  .signupformcontainer {
+    width: 50%;
+    margin-left: 30%;
+  }
+  
+  .signupbox-container {
+    display: flex;
+  }
+  
+  .signupbox-container > p {
+    margin-left: 3%;
+    font-size: 14px;
+  }
+  
+  .signupbox-container > input {
+    width: 15px;
+    height: 15px;
+  }
+  
+  .signupinputfield-container {
+    width: 57%;
+    padding: 16px;
+    margin-left: 7%;
+  }
+  
+  .signuptitle {
+    margin-left: 5%;
+    margin-bottom: 10%;
+    font-family: 'Karla', sans-serif;
+  }
+  
+  /* Full-width input fields */
+  .signupinputfield-container {
+    input[type="email"],
+    input[type="text"],
+    input[type="password"] {
+      width: 93%;
+      height: 25px;
+      padding: 15px;
+      margin: 5px 0 18px 0;
+      display: inline-block;
+      border: none;
+      background: #f2f2f2;
+      font-size: 18px;
+      &:focus {
+        background-color: #f2f2f2;
+        outline: none;
+      }
+    }
+  }
+  
+  .signupbtn:hover {
+    opacity: 1;
+  }
+  
+  .signupbtn {
+    background-color: #262f3c;
+    color: white;
+    padding: 15px;
+    margin: 5px 0 8px 0;
+    border: none;
+    cursor: pointer;
+    opacity: 0.9;
+    float: left;
+    width: 100%;
+    height: 64px;
+    font-size: 18px;
+  }
+
+  #signinlink{
+      font-size: small;
+      font-weight: bold;
+      margin-left: 25%;
+  }
+  

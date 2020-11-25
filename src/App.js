@@ -1,10 +1,19 @@
+import React from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Signup from "./components/signuppage/signuppage";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <h1> hey </h1>
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route
+          path="/"
+          name="BayerCreate"
+          component={(props) => <Signup {...props} />}
+        />
+      </Switch>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
