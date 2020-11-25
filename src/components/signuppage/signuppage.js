@@ -27,7 +27,7 @@ const SignupComponent = ({ errors, touched }) => {
 
                         <Field type="text" placeholder="Affiliation Code" name="affiliationcode" />
 
-                        <button className="signupbtn" type="submit">Create a Free Account</button>
+                        <button className="signupbtn" type="submit">Sign Up</button>
                         <span id="signinlink"> Sign-in to your members account </span>
                     </div>
                 </Form>
