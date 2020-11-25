@@ -1,0 +1,111 @@
+.signinflexcontainer {
+    display: flex;
+    width: 100%;
+  }
+  
+  .signinformerror {
+    color: red;
+    font-size: 13px;
+  }
+  
+  .signinformcontainer {
+    width: 50%;
+    margin-left: 30%;
+  }
+  
+  .signinbox-container {
+    display: flex;
+  }
+  
+  .signinbox-container > p {
+    margin-left: 3%;
+    font-size: 14px;
+  }
+  
+  .signinbox-container > input {
+    width: 15px;
+    height: 15px;
+  }
+  
+  .signininputfield-container {
+    width: 57%;
+    padding: 16px;
+    margin-left: 7%;
+  }
+  
+  .signintitle {
+    margin-left: 5%;
+    margin-bottom: 10%;
+    font-family: 'Karla', sans-serif;
+  }
+  
+  /* Full-width input fields */
+  .signininputfield-container {
+    input[type="email"],
+    input[type="text"],
+    input[type="password"] {
+      width: 93%;
+      height: 25px;
+      padding: 15px;
+      margin: 5px 0 18px 0;
+      display: inline-block;
+      border: none;
+      background: #f2f2f2;
+      font-size: 18px;
+      &:focus {
+        background-color: #f2f2f2;
+        outline: none;
+      }
+    }
+  }
+  
+  .signinbtn:hover {
+    opacity: 1;
+  }
+  
+  .signinbtn {
+    background-color: #262f3c;
+    color: white;
+    padding: 15px;
+    margin: 5px 0 20px 0;
+    border: none;
+    cursor: pointer;
+    opacity: 0.9;
+    float: left;
+    width: 100%;
+    font-size: 18px;
+  }
+  
+  #remembermetext{
+      font-weight: bold;
+      font-family: 'Karla', sans-serif;
+      color: #262f3c;
+  }
+
+  #forgetpassword{
+      float: right;
+      font-family: 'Karla', sans-serif;
+      font-weight: bold;
+      color: #262f3c;
+  }
+
+  #notmember{
+      float: right;
+      font-family: 'Karla', sans-serif;
+      font-weight: bold;
+      font-size: small;
+      margin-top: 15px;
+      color: #262f3c;
+  }
+
+  #footerlink{
+      float: left;
+  }
+
+
+  .terms{
+      margin-left: 40px;
+      font-family: 'Karla', sans-serif;
+      font-weight: bold;
+      color: #262f3c;
+  }
