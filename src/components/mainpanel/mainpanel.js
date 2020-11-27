@@ -2,6 +2,7 @@ import React from "react";
 import { Switch, Route, Link } from "react-router-dom";
 import UserManagement from "./usermanagement/usermanagement";
 import ServiceRequest from "./servicerequest/servicerequest";
+import HomePage from "../homepage/homepage";
 import "./mainpanel.scss";
 
 
@@ -17,7 +18,7 @@ export default function mainPanel() {
             <div className="main">
                 <Switch>
                     <Route exact path="/">
-                        <mainPanel />
+                        <HomePage />
                     </Route>
                     <Route path="/usermanagement">
                         <UserManagement />
