@@ -3,8 +3,25 @@ import './login.scss';
 import * as Yup from "yup";
 import { withFormik, Form, Field } from "formik";
 import { withRouter } from "react-router-dom/cjs/react-router-dom.min";
+import { signinRequested } from "../../actions/authActions";
+import { connect } from 'react-redux';
+import { useHistory } from "react-router-dom";
 
-const SigninComponent = ({ errors, touched }) => {
+const SigninComponent = ({ errors, touched, signInInfo }) => {
+
+    const [serverError, setServerError] = React.useState('');
+    const history = useHistory();
+
+    React.useEffect(() => {
+        if (signInInfo.ErrorMessage) {
+            const err = signInInfo.ErrorMessage;
+            setServerError(err);
+        }
+    }, [signInInfo.ErrorMessage]);
+
+    const gotoSignup = () => {
+        history.push('/signup');
+    }
 
     return (
         <div className="signinflexcontainer">
@@ -14,6 +31,7 @@ const SigninComponent = ({ errors, touched }) => {
                     <div className="signininputfield-container">
                         <h1 className="signintitle">Sign In</h1>
 
+                        <p className="signinformerror">{serverError}</p>
                         {touched.email && errors.email && <p className="signinformerror">{errors.email}</p>}
                         <Field type="email" placeholder="Email" name="email" />
 
@@ -28,7 +46,7 @@ const SigninComponent = ({ errors, touched }) => {
                             <span id="remembermetext">Remember me</span>
 
                             <span id="forgetpassword">Forget Password?</span>
-                            <span id="notmember">Not a Member? Register Now</span>
+                            <span id="notmember" onClick={gotoSignup}>Not a Member? Register Now</span>
                         </div>
                         <br /><br /><br /><br />
                         <br /><br /><br /><br />
@@ -57,10 +75,16 @@ const Login = withRouter(withFormik({
     }),
 
     handleSubmit(values, { props }) {
-        // console.log("heyde", values);
+        props.dispatch(signinRequested(values));
     }
 
 })(SigninComponent));
 
 
-export default Login
+const mapStateToProps = (state) => {
+    return {
+        signInInfo: state.authenticationRed
+    };
+};
+
+export default connect(mapStateToProps)(Login)
