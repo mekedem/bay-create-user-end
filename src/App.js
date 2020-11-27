@@ -4,6 +4,7 @@ import Signup from "./components/signuppage/signuppage";
 import Login from "./components/loginpage/loginpage";
 import ForgotPassword from "./components/forgotpassword/forgotpassword";
 import MainPanel from "./components/mainpanel/mainpanel";
+import ProtectedRoute from "./protectedRoutes";
 
 
 
@@ -28,7 +29,7 @@ const App = () => {
             name="forgotpassword"
             component={(props) => <ForgotPassword {...props} />}
           />
-          <Route
+          <ProtectedRoute
             path="/"
             name="home"
             component={(props) => <MainPanel {...props} />}
