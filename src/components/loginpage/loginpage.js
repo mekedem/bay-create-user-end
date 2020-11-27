@@ -38,8 +38,6 @@ const SigninComponent = ({ errors, touched, signInInfo }) => {
                         {touched.password && errors.password && <p className="signinformerror">{errors.password}</p>}
                         <Field type="password" placeholder="Password" name="password" />
 
-                        <Field type="text" placeholder="Enter Code" name="affiliationcode" />
-
                         <button className="signinbtn" type="submit">Login</button>
                         <div>
                             <Field type="checkbox" name="terms" checked={true} />

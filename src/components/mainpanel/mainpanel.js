@@ -6,7 +6,7 @@ import HomePage from "../homepage/homepage";
 import "./mainpanel.scss";
 
 
-export default function mainPanel() {
+export default function mainPanel(props) {
     return (
         <div className="wrapper">
             <div className="sidenav">
@@ -24,7 +24,7 @@ export default function mainPanel() {
                         <UserManagement />
                     </Route>
                     <Route path="/servicerequest">
-                        <ServiceRequest />
+                        <ServiceRequest props={props} />
                     </Route>
                 </Switch>
             </div>
