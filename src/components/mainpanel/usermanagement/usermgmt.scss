@@ -1,0 +1,76 @@
+.buttonadd {
+    background-color: #262f3c; /* Green */
+    border: none;
+    color: white;
+    padding: 5px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 30px;
+  }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      padding: 0 20px;
+      display: block;
+    }
+
+    .department-item-container{
+      width: 100%;
+    }
+
+    .department-item-container td {
+      padding: 16px 10px 16px 0;
+      border-bottom: 3px solid #f1f1f1;
+    }
+    
+    .item-name{
+      width: 15%;
+      font-size: 17px;
+    }
+    
+    .item-action{
+      width: 10%;
+      font-size: 17px;
+    }
+
+    .item-description{
+      width: 25%;
+      font-size: 17px;
+    }
+
+    .items-title{
+      font-size: 20px;
+      margin-left: 30%;
+    }
+
+    .item-file{
+      width: 10%;
+      font-size: 17px;
+    }
+
+    .item-date{
+      width: 10%;
+      font-size: 17px;
+    }
+
+
+    // .department-item-date{
+    //   width: 12%;
+    //   font-size: 17px;
+    // }
+
+    // .department-item-description{
+    //   width: 23%;
+    //   font-size: 17px;
+    // }
+
+    .actionbuttons {
+      border: none;
+      border-radius: 4px;
+      color: white;
+      background-color: #21618C;
+      cursor: pointer;
+      outline: none;
+      padding: 5px 8px;
+    }

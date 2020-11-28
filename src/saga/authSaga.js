@@ -10,7 +10,6 @@ const signupRequestSaga = function* (action) {
         const response = yield call(signupuser, userCredential);
         if (response.success) {
             yield put(signupResponse(response.data));
-            // userCredential.history.push("/projectForm");
         } else yield put(signupError(response.message));
     } catch (error) {
         console.log("Connection Error happened", error);
@@ -23,7 +22,7 @@ const signinRequestSaga = function* (action) {
         const response = yield call(signinuser, userCredential);
         if (response.success) {
             yield put(signinResponse(response.data));
-            // userCredential.history.push("/projectForm");
+            userCredential.history.push("/");
         } else yield put(signinError(response.message));
     } catch (error) {
         console.log("Connection Error happened", error);

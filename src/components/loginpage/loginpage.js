@@ -73,7 +73,7 @@ const Login = withRouter(withFormik({
     }),
 
     handleSubmit(values, { props }) {
-        props.dispatch(signinRequested(values));
+        props.dispatch(signinRequested(values, props.history));
     }
 
 })(SigninComponent));

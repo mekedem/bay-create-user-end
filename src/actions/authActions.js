@@ -28,11 +28,12 @@ export const signupError = (message) => ({
 });
 
 
-export const signinRequested = ({ email, password }) => ({
+export const signinRequested = ({ email, password }, history) => ({
     type: LOGIN_REQUEST,
     payload: {
         email: email,
-        password: password
+        password: password,
+        history,
     },
 });
 
