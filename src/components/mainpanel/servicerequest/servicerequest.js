@@ -6,31 +6,46 @@ import "./servicerequest.scss";
 const ServiceRequestComponent = ({ requestService, requestsList }) => {
 
     React.useEffect(() => {
-        requestService({ pagevalue: "1" });
+        requestService({ pagevalue: "0" });
     }, []);
 
-    // console.log("requestllist >>>>>>>> ", requestsList);
+    const dateFormatter = (d) => {
+        const ddmmyy = new Date(d);
+        const retdate = ddmmyy.getDay() + "/" + ddmmyy.getMonth() + "/" + ddmmyy.getFullYear();
+        return retdate
+    }
+
+    const isFileAttached = (f) => {
+        if (f.length == 0) return "No";
+        return "Yes"
+    }
 
     return (
         <div>
+            <div className="items-title"><h2>Service Requests</h2></div>
+            <hr />
             <table>
                 <tbody>
-                    <tr className="department-item-container">
-                        <td className="department-item-name"><button className="buttonadd">+</button></td>
-                        <td className="department-item-description"><h2>User Info</h2></td>
+                    <tr className="header-item-container">
+
                     </tr>
+
                     <tr className="department-item-container">
-                        <td className="department-item-name">UserName</td>
-                        <td className="department-item-name">Mobile</td>
-                        <td className="department-item-description">Email</td>
-                        <td className="department-item-member">buttons here</td>
+                        <td className="item-name"><strong>Requested By</strong></td>
+                        <td className="item-date"><strong>Requested</strong></td>
+                        <td className="item-description"><strong>Description</strong></td>
+                        <td className="item-file"><strong>Files?</strong></td>
+                        <td className="item-description"><strong>Status</strong></td>
+                        <td className="item-action"></td>
                     </tr>
-                    {requestsList.map((req) => (
-                        <tr className="department-item-container">
-                            <td className="department-item-name"> {req._id}</td>
-                            <td className="department-item-name">nothing here</td>
-                            <td className="department-item-description">{req.description}</td>
-                            <td className="department-item-name"></td>
+                    {requestsList.map((req, index) => (
+                        <tr key={index} className="department-item-container">
+                            <td className="item-name"> {req.user.fullName}</td>
+                            <td className="item-date">{dateFormatter(req.createdAt)}</td>
+                            <td className="item-description">{req.description}</td>
+                            <td className="item-file">{isFileAttached(req.files)}</td>
+                            <td className="item-description">{req.status.description}</td>
+                            <td className="item-action"> <button className="actionbuttons"> Edit </button> </td>
                         </tr>
                     ))}
                 </tbody>

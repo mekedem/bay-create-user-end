@@ -7,10 +7,14 @@
   left: 0;
   background-color: #262f3c;
   overflow-x: hidden;
-  padding-top: 80px;
+  padding-top: 0px;
   padding-left: 6px;
   padding-right: 6px;
 
+}
+
+.logoimg{
+  background-color: white;
 }
 
 .sidenav a {
@@ -21,17 +25,20 @@
   display: block;
   text-align: start;
   font-family: arial;
-  border-bottom: white 0.7px solid;
+  border: white 0.7px solid;
   margin-bottom: 5px;
 }
 
 .sidenav a:hover{
+  cursor: pointer;
+}
+
+.onsidelink{
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border: none;
   outline: 0;
   color: white;
-  background-color: #000;
-  cursor: pointer;
+  background-color: #1a1a1a;
 }
 
 .main {
