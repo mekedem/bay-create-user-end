@@ -1,0 +1,41 @@
+.buttonadd {
+    background-color: #262f3c; /* Green */
+    border: none;
+    color: white;
+    padding: 5px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 30px;
+  }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      padding: 0 20px;
+      display: block;
+    }
+
+    .department-item-container{
+      width: 100%;
+    }
+
+    .department-item-container td {
+      padding: 16px 22px 16px 0;
+      border-bottom: 3px solid #f1f1f1;
+    }
+    
+    .department-item-name{
+      width: 15%;
+      font-size: 17px;
+    }
+
+    .department-item-description{
+      width: 30%;
+      font-size: 17px;
+    }
+
+    .department-item-member{
+      width: 13%;
+      font-size: 17px;
+    }
+  
