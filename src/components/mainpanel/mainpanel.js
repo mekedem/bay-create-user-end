@@ -24,7 +24,7 @@ export default function mainPanel(props) {
                         <UserManagement />
                     </Route>
                     <Route path="/servicerequest">
-                        <ServiceRequest props={props} />
+                        <ServiceRequest {...props} />
                     </Route>
                 </Switch>
             </div>
