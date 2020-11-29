@@ -23,13 +23,8 @@ export const signinuser = async (signinCredentials) => {
     };
     try {
         let response = await fetch(`${baseURL}/${LOGIN_URL}`, requestOptions)
-        if (response.ok) {
-            return await response.json();
-        }
-        if (response.status == 401) {
-            console.log(response);
-            return await response.json();
-        }
+
+        return await response.json();
     }
     catch {
         throw new Error("Unexpected error!!!");

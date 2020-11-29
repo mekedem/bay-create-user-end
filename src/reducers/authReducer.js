@@ -1,5 +1,5 @@
 import "../constants/constants";
-import { LOGIN_FAILURE, LOGIN_SUCCESS, SIGNUP_FAILURE, SIGNUP_SUCCESS, USER_TOKEN } from "../constants/constants";
+import { LOGIN_FAILURE, LOGIN_SUCCESS, SIGNUP_FAILURE, SIGNUP_SUCCESS, USER_TOKEN, INITIALDATA_FETCHED } from "../constants/constants";
 
 const initialState = {
     userInfo: [],
@@ -32,6 +32,13 @@ const authenticationReducer = (state = initialState, action) => {
                 userInfo: state.userInfo,
                 ErrorMessage: action.payload.message,
             };
+
+        case INITIALDATA_FETCHED:
+            return {
+                userInfo: action.payload.data,
+                ErrorMessage: "",
+            };
+
         default:
             return state;
     }

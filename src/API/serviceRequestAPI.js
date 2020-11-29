@@ -1,5 +1,5 @@
 import axios from "axios";
-import { baseURL, GETSERVICEREQUEST_URL, GETLISTOFUSERS_URL } from "../API/API_URLS";
+import { baseURL, GETSERVICEREQUEST_URL, GETLISTOFUSERS_URL, GETINITIALDATA_URL } from "../API/API_URLS";
 import { USER_TOKEN } from "../constants/constants";
 
 const API = axios.create({
@@ -17,3 +17,7 @@ export const getServiceRequests = (pagevalue) => {
 export const getListOfUsers = (pagevalue) => {
     return API.get(baseURL + `/${GETLISTOFUSERS_URL}?page=${pagevalue}`).then((d) => d.data);
 };
+
+export const getInitialData = () => {
+    return API.get(baseURL + `/${GETINITIALDATA_URL}`).then((d) => d.data);
+}
