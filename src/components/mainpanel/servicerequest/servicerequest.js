@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 import React from "react";
+import { MdEdit } from 'react-icons/md';
 import { getServiceRequest } from "../../../actions/serviceReqAction";
 import "./servicerequest.scss";
 
@@ -45,7 +46,7 @@ const ServiceRequestComponent = ({ requestService, requestsList }) => {
                             <td className="item-description">{req.description}</td>
                             <td className="item-file">{isFileAttached(req.files)}</td>
                             <td className="item-description">{req.status.description}</td>
-                            <td className="item-action"> <button className="actionbuttons"> Edit </button> </td>
+                            <td className="item-action"> <button className="actionbuttons"> <MdEdit /> </button> </td>
                         </tr>
                     ))}
                 </tbody>
