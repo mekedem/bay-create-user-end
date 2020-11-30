@@ -4,3 +4,4 @@ export const LOGIN_URL = "users/account/login";
 export const GETSERVICEREQUEST_URL = "requests";
 export const GETLISTOFUSERS_URL = "users";
 export const GETINITIALDATA_URL = "users/account/initialData";
+export const LOGOUT_URL = "users/account/logout";

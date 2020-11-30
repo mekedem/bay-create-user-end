@@ -1,6 +1,6 @@
 import { GET_SERVICE_REQUEST, SERVICE_REQUEST_RESPONSE, SERVICE_REQUEST_ERROR } from "../constants/constants";
 
-export const getServiceRequest = ({ pagevalue }) => ({
+export const getServiceRequestAction = ({ pagevalue }) => ({
     type: GET_SERVICE_REQUEST,
     payload: {
         pagevalue: pagevalue,

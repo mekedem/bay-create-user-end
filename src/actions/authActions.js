@@ -1,5 +1,8 @@
 import "../constants/constants"
-import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, SIGNUP_FAILURE, SIGNUP_REQUEST, SIGNUP_SUCCESS, INITIALDATA_FETCHED } from "../constants/constants";
+import {
+    LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, SIGNUP_FAILURE,
+    SIGNUP_REQUEST, SIGNUP_SUCCESS, INITIALDATA_FETCHED, LOGOUT_SUCCESS
+} from "../constants/constants";
 
 export const signupRequested = ({ email, fullname, password, affiliationcode, phonenumber }) => ({
     type: SIGNUP_REQUEST,
@@ -57,4 +60,9 @@ export const initialDataFetched = (data) => ({
     payload: {
         data,
     }
+});
+
+
+export const logoutUserAction = () => ({
+    type: LOGOUT_SUCCESS,
 });

@@ -1,13 +1,14 @@
 import { connect } from "react-redux";
 import React from "react";
 import { MdEdit } from 'react-icons/md';
-import { getServiceRequest } from "../../../actions/serviceReqAction";
+import { getServiceRequestAction } from "../../../actions/serviceReqAction";
 import "./servicerequest.scss";
+import { USER_TOKEN } from "../../../constants/constants";
 
-const ServiceRequestComponent = ({ requestService, requestsList }) => {
+const ServiceRequestComponent = ({ requestServiceFirst, requestsList }) => {
 
     React.useEffect(() => {
-        requestService({ pagevalue: "0" });
+        requestServiceFirst({ pagevalue: "0" });
     }, []);
 
     const dateFormatter = (d) => {
@@ -65,8 +66,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    requestService: (pagevalue) => {
-        dispatch(getServiceRequest(pagevalue));
+    requestServiceFirst: (pagevalue) => {
+        dispatch(getServiceRequestAction(pagevalue));
     }
 });
 

@@ -16,15 +16,12 @@ const serviceRequestReducer = (state = initialState, action) => {
 
         case SERVICE_REQUEST_ERROR:
             return {
-                requestData: action.payload,
+                requestData: [],
                 ErrorMessage: action.payload.message
             }
 
         default:
-            return {
-                requestData: state.requestData,
-                ErrorMessage: state.ErrorMessage,
-            };
+            return state;
     }
 }
 
