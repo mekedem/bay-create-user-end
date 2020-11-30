@@ -1,25 +1,30 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Switch, Route, Link, useLocation } from "react-router-dom";
+import { Switch, Route, Link, useLocation, useHistory } from "react-router-dom";
 import UserManagement from "./usermanagement/usermanagement";
 import ServiceRequest from "./servicerequest/servicerequest";
 import HomePage from "../homepage/homepage";
 import { getInitialData } from "../../API/serviceRequestAPI";
-import { initialDataFetched } from "../../actions/authActions";
+import { logoutuser } from "../../API/authAPI";
+import { initialDataFetched, logoutUserAction } from "../../actions/authActions";
 import "./mainpanel.scss";
+import { USER_TOKEN } from "../../constants/constants";
 
 
-const MainPanel = ({ usersRole, getInitData }, props) => {
+const MainPanel = ({ usersRole, getInitData, logmeout }, props) => {
     const location = useLocation();
-    const [reqFinished, setReqFinished] = React.useState(false);
+    const history = useHistory();
+    const [isUser, setIsUser] = React.useState(true);
 
     React.useEffect(() => {
-        pullInitialData();
-        setTimeout(() => {
-            setReqFinished(true);
-        }, 600);
-
-    }, []);
+        if (usersRole.user_Info.role == "admin") setIsUser(false);
+        if (usersRole.initialData) { }
+        else {
+            if (localStorage.getItem(USER_TOKEN)) {
+                pullInitialData();
+            }
+        }
+    }, [usersRole.user_Info.role]);
 
     const pullInitialData = async () => {
         const initdata = await getInitialData();
@@ -31,14 +36,24 @@ const MainPanel = ({ usersRole, getInitData }, props) => {
         }
     }
 
+
+    const logOutOfhere = async () => {
+        const logoutresponse = await logoutuser();
+        if (logoutresponse.success) {
+            logmeout();
+            history.push('/login');
+        }
+    }
+
     return (
-        !reqFinished ? <div></div> :
+        !usersRole.initialData ? <div>Loading...</div> :
             <div className="wrapper">
                 <div className="sidenav">
                     <img className="logoimg" src="./bayerlogo.png" width="200" height="100" />
                     <Link className={location.pathname == "/" ? "onsidelink" : "notonsidelink"} to="/">Home</Link>
-                    {usersRole == "user" ? "" : <Link className={location.pathname == "/usermanagement" ? "onsidelink" : "notonsidelink"} to="/usermanagement">User Management</Link>}
+                    {!isUser ? <Link className={location.pathname == "/usermanagement" ? "onsidelink" : "notonsidelink"} to="/usermanagement">User Management</Link> : ""}
                     <Link className={location.pathname == "/servicerequest" ? "onsidelink" : "notonsidelink"} to="/servicerequest">Service Requests</Link>
+                    <button id="logoutbutton" onClick={logOutOfhere}> Logout </button>
                 </div>
 
                 <div className="main">
@@ -60,13 +75,16 @@ const MainPanel = ({ usersRole, getInitData }, props) => {
 
 const mapStateToProps = (state) => {
     return {
-        usersRole: state.authenticationRed.userInfo.role
+        usersRole: state.authenticationRed
     };
 };
 
 const mapDispatchToProps = (dispatch) => ({
     getInitData: (data) => {
         dispatch(initialDataFetched(data));
+    },
+    logmeout: () => {
+        dispatch(logoutUserAction());
     }
 });
 
