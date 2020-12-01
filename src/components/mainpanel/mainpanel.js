@@ -65,7 +65,7 @@ const MainPanel = ({ usersRole, getInitData, logmeout }, props) => {
                             <UserManagement />
                         </Route>
                         <Route path="/servicerequest">
-                            <ServiceRequest {...props} />
+                            <ServiceRequest {...props} role={isUser} />
                         </Route>
                     </Switch>
                 </div>
