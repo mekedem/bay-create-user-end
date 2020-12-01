@@ -29,7 +29,7 @@ const authenticationReducer = (state = initialState, action) => {
             console.log("logintoken", action.payload.data.token);
             localStorage.setItem(USER_TOKEN, action.payload.data.token);
             return {
-                user_Info: action.payload.data,
+                user_Info: action.payload.data.user_info,
                 ErrorMessage: "",
                 initialData: true
             };

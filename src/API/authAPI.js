@@ -33,9 +33,10 @@ export const signinuser = async (signinCredentials) => {
 }
 
 export const logoutuser = async () => {
+    const token = localStorage.getItem(USER_TOKEN);
     const requestOptions = {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': localStorage.getItem(USER_TOKEN) },
+        headers: { 'Content-Type': 'application/json', 'Authorization': token },
         body: JSON.stringify({})
     };
     try {

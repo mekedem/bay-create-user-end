@@ -17,14 +17,14 @@ const MainPanel = ({ usersRole, getInitData, logmeout }, props) => {
     const [isUser, setIsUser] = React.useState(true);
 
     React.useEffect(() => {
-        if (usersRole.user_Info.role == "admin") setIsUser(false);
+        if (usersRole.user_Info.role === "admin") setIsUser(false);
         if (usersRole.initialData) { }
         else {
             if (localStorage.getItem(USER_TOKEN)) {
                 pullInitialData();
             }
         }
-    }, [usersRole.user_Info.role]);
+    }, []);
 
     const pullInitialData = async () => {
         const initdata = await getInitialData();
