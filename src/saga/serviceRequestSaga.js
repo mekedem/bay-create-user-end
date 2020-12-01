@@ -9,7 +9,7 @@ const serviceRequestSaga = function* (action) {
     try {
         const response = yield call(getServiceRequests, pagevalue);
         if (response.success) {
-            yield put(serviceResponse(response.data.requests));
+            yield put(serviceResponse(response.data.requests, response.data.total));
         } else yield put(serviceResponseError(response.message));
     } catch (error) {
         console.log("Connection Error happened", error);

@@ -1,17 +1,27 @@
 import { connect } from "react-redux";
-import React from "react";
+import React, { useState } from "react";
 import { MdEdit } from 'react-icons/md';
 import { getServiceRequestAction, addServiceRequest } from "../../../actions/serviceReqAction";
 import "./servicerequest.scss";
 import RequestServiceModal from "../../../utilcomponents/requestservicemodal/requestservicemodal";
+import ReactPaginate from 'react-paginate';
 
-const ServiceRequestComponent = ({ requestServiceFirst, requestsList, addRequest, role }) => {
+const ServiceRequestComponent = ({ requestServiceFirst, requestsList, addRequest, role, totalRequest }) => {
 
-    const [showModal, setShowModal] = React.useState(false);
+    const [showModal, setShowModal] = useState(false);
+    const [pageCount, setPageCount] = useState(2);
+    const [currentPage, setCurrentPage] = useState("0");
+
 
     React.useEffect(() => {
-        requestServiceFirst({ pagevalue: "0" });
-    }, []);
+        requestServiceFirst({ pagevalue: currentPage });
+        setPageCount(Math.ceil(totalRequest / 10));
+    }, [currentPage, totalRequest]);
+
+    const handlePageClick = (e) => {
+        const selectedPage = e.selected;
+        setCurrentPage(selectedPage.toString());
+    };
 
     const dateFormatter = (d) => {
         const ddmmyy = new Date(d);
@@ -58,6 +68,18 @@ const ServiceRequestComponent = ({ requestServiceFirst, requestsList, addRequest
                     ))}
                 </tbody>
             </table>
+            <div>
+                <ReactPaginate
+                    previousLabel={"prev"}
+                    nextLabel={"next"}
+                    breakLabel={"..."}
+                    breakClassName={"break-me"}
+                    pageCount={pageCount}
+                    onPageChange={handlePageClick}
+                    containerClassName={"pagination"}
+                    subContainerClassName={"pages pagination"}
+                    activeClassName={"active"} />
+            </div>
         </div>
     );
 };
@@ -67,7 +89,8 @@ const ServiceRequestComponent = ({ requestServiceFirst, requestsList, addRequest
 
 const mapStateToProps = (state) => {
     return {
-        requestsList: state.serviceRequestRed.requestData
+        requestsList: state.serviceRequestRed.requestData,
+        totalRequest: state.serviceRequestRed.total
     };
 };
 

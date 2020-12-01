@@ -7,10 +7,11 @@ export const getServiceRequestAction = ({ pagevalue }) => ({
     },
 });
 
-export const serviceResponse = (data) => ({
+export const serviceResponse = (data, total) => ({
     type: SERVICE_REQUEST_RESPONSE,
     payload: {
         data,
+        total
     },
 });
 
