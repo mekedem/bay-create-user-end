@@ -7,6 +7,8 @@ import RequestServiceModal from "../../../utilcomponents/requestservicemodal/req
 
 const ServiceRequestComponent = ({ requestServiceFirst, requestsList }) => {
 
+    const [showModal, setShowModal] = React.useState(false);
+
     React.useEffect(() => {
         requestServiceFirst({ pagevalue: "0" });
     }, []);
@@ -25,8 +27,8 @@ const ServiceRequestComponent = ({ requestServiceFirst, requestsList }) => {
     return (
         <div>
             <div>
-                <button className="buttonadd">+ add</button>
-                {false && <RequestServiceModal />}
+                <button className="buttonadd" onClick={() => { setShowModal(true) }}>+ add</button>
+                {showModal && <RequestServiceModal handleClose={setShowModal} />}
             </div>
             <div className="items-title"><h2>Service Requests</h2></div>
             <hr />
