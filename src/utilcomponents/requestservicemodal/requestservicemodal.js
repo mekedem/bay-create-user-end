@@ -10,23 +10,27 @@ const requestSchema = () => {
     return Yup.object().shape({
         description: Yup.string()
             .min(10, "Too Short!")
-            .max(150, "Too Long!")
+            .max(230, "Too Long!")
             .required("* Required"),
     });
 };
 
 
 
-const requestServiceModal = ({ handleClose }) => {
+const requestServiceModal = ({ handleClose, addRequest }) => {
 
     const onSubmit = (values) => {
         setTimeout(() => {
             requireService({ description: values.description, files: [] })
                 .then((response) => {
-                    console.log(response)
+                    if (response.success) {
+                        console.log(response);
+                        addRequest(response.data);
+                        handleClose();
+                    }
                 })
                 .catch((error) => {
-                    console.log(error);
+                    alert("error while adding you request... retry");
                 })
                 .then(() => { });
         }, 600);

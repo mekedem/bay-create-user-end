@@ -1,11 +1,11 @@
 import { connect } from "react-redux";
 import React from "react";
 import { MdEdit } from 'react-icons/md';
-import { getServiceRequestAction } from "../../../actions/serviceReqAction";
+import { getServiceRequestAction, addServiceRequest } from "../../../actions/serviceReqAction";
 import "./servicerequest.scss";
 import RequestServiceModal from "../../../utilcomponents/requestservicemodal/requestservicemodal";
 
-const ServiceRequestComponent = ({ requestServiceFirst, requestsList }) => {
+const ServiceRequestComponent = ({ requestServiceFirst, requestsList, addRequest, role }) => {
 
     const [showModal, setShowModal] = React.useState(false);
 
@@ -27,8 +27,8 @@ const ServiceRequestComponent = ({ requestServiceFirst, requestsList }) => {
     return (
         <div>
             <div>
-                <button className="buttonadd" onClick={() => { setShowModal(true) }}>+ add</button>
-                {showModal && <RequestServiceModal handleClose={setShowModal} />}
+                {role && <button className="buttonadd" onClick={() => { setShowModal(true) }}>+ add</button>}
+                {showModal && <RequestServiceModal handleClose={setShowModal} addRequest={addRequest} />}
             </div>
             <div className="items-title"><h2>Service Requests</h2></div>
             <hr />
@@ -74,6 +74,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
     requestServiceFirst: (pagevalue) => {
         dispatch(getServiceRequestAction(pagevalue));
+    },
+    addRequest: (data) => {
+        dispatch(addServiceRequest(data));
     }
 });
 

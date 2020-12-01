@@ -4,7 +4,6 @@ import { USER_TOKEN } from "../constants/constants";
 
 export const getServiceRequests = (pagevalue) => {
     const token = localStorage.getItem(USER_TOKEN);
-    console.log("@getsrvicereq: ", token);
     const url = baseURL + `/${GETSERVICEREQUEST_URL}?page=${pagevalue}`;
     return axios.get(url, { headers: { Authorization: token, } }).then(d => d.data);
 };
@@ -18,12 +17,11 @@ export const getListOfUsers = (pagevalue) => {
 export const getInitialData = () => {
     const token = localStorage.getItem(USER_TOKEN);
     const url = baseURL + `/${GETINITIALDATA_URL}`;
-    return axios.get(url, { headers: { Authorization: token, } }).then(d => d.data);
+    return axios.get(url, { headers: { Authorization: token, something: 'this is' } }).then(d => d.data);
 }
 
 export const requireService = (request) => {
-    const tokenauth = localStorage.getItem(USER_TOKEN);
-    console.log("@requireservice: ", tokenauth);
+    const token = localStorage.getItem(USER_TOKEN);
     const url = baseURL + `/${GETSERVICEREQUEST_URL}`;
-    return axios.post(url, { headers: { Authorization: tokenauth, }, body: { request } }).then(d => d.data);
+    return axios.post(url, request, { headers: { Authorization: token } }).then(d => d.data);
 }

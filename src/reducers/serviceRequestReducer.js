@@ -1,5 +1,5 @@
 import "../constants/constants";
-import { SERVICE_REQUEST_RESPONSE, SERVICE_REQUEST_ERROR } from "../constants/constants";
+import { SERVICE_REQUEST_RESPONSE, SERVICE_REQUEST_ERROR, ADD_SERVICE_REQUEST } from "../constants/constants";
 
 const initialState = {
     requestData: [],
@@ -20,6 +20,11 @@ const serviceRequestReducer = (state = initialState, action) => {
                 ErrorMessage: action.payload.message
             }
 
+        case ADD_SERVICE_REQUEST:
+            const newRequestData = { ...state };
+            newRequestData.requestData.unshift(action.payload.data);
+
+            return newRequestData;
         default:
             return state;
     }
