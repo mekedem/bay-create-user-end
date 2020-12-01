@@ -1,0 +1,40 @@
+.modal-title {
+    font-size: 1.3em;
+    margin-bottom: 20px;
+  }
+  
+  .form-error-msg {
+    color: rgb(204, 22, 22);
+  }
+  
+  .modal-body {
+    min-width: 400px;
+  
+    .input-text {
+      padding-top: 10px;
+      padding-bottom: 10px;
+      font-size: 1.15em;
+    }
+
+    input[type='select']{
+      padding-top: 10px;
+      padding-bottom: 10px;
+      font-size: 1.15em;
+    }
+  }
+  
+  .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 40px;
+    gap: 20px;
+  
+    button {
+      min-width: 120px;
+    }
+  }
+  
+  .field-msg {
+    margin-top: 8px;
+  }
+  

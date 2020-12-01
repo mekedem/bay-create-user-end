@@ -3,7 +3,7 @@ import React from "react";
 import { MdEdit } from 'react-icons/md';
 import { getServiceRequestAction } from "../../../actions/serviceReqAction";
 import "./servicerequest.scss";
-import { USER_TOKEN } from "../../../constants/constants";
+import RequestServiceModal from "../../../utilcomponents/requestservicemodal/requestservicemodal";
 
 const ServiceRequestComponent = ({ requestServiceFirst, requestsList }) => {
 
@@ -24,6 +24,10 @@ const ServiceRequestComponent = ({ requestServiceFirst, requestsList }) => {
 
     return (
         <div>
+            <div>
+                <button className="buttonadd">+ add</button>
+                {false && <RequestServiceModal />}
+            </div>
             <div className="items-title"><h2>Service Requests</h2></div>
             <hr />
             <table>
