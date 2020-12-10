@@ -4,7 +4,50 @@ import { MdEdit } from 'react-icons/md';
 import { getServiceRequestAction, addServiceRequest } from "../../../actions/serviceReqAction";
 import "./servicerequest.scss";
 import RequestServiceModal from "../../../utilcomponents/requestservicemodal/requestservicemodal";
+import EditRequestModal from "../../../utilcomponents/editrequestmodal/editrequestmodal";
 import ReactPaginate from 'react-paginate';
+
+
+const ServiceRequestItem = ({ fullName, createdAt, description, files, status, requestID, statusID }) => {
+
+    const [showServiceEdit, setShowServiceEdit] = useState(false);
+
+    const dateFormatter = (d) => {
+        const ddmmyy = new Date(d);
+        const retdate = ddmmyy.getDay() + "/" + ddmmyy.getMonth() + "/" + ddmmyy.getFullYear();
+        return retdate
+    }
+
+    const isFileAttached = (f) => {
+        if (f.length == 0) return "No";
+        return "Yes"
+    }
+
+    return (
+        <>
+            <tr className="department-item-container">
+                <td className="item-name"> {fullName}</td>
+                <td className="item-date">{dateFormatter(createdAt)}</td>
+                <td className="item-description">{description}</td>
+                <td className="item-file">{isFileAttached(files)}</td>
+                <td className="item-description">{status}</td>
+                <td className="item-action">
+                    <button onClick={() => { setShowServiceEdit(true) }} className="actionbuttons"> <MdEdit /> </button>
+                </td>
+                {showServiceEdit && <EditRequestModal handleEditClose={setShowServiceEdit}
+                    description={description}
+                    files={files}
+                    status={status}
+                    requestID={requestID}
+                    statusID={statusID}
+                />}
+
+
+            </tr>
+        </>
+    );
+};
+
 
 const ServiceRequestComponent = ({ requestServiceFirst, requestsList, addRequest, role, totalRequest }) => {
 
@@ -22,17 +65,6 @@ const ServiceRequestComponent = ({ requestServiceFirst, requestsList, addRequest
         setCurrentPage(selectedPage.toString());
     };
 
-    const dateFormatter = (d) => {
-        const ddmmyy = new Date(d);
-        const retdate = ddmmyy.getDay() + "/" + ddmmyy.getMonth() + "/" + ddmmyy.getFullYear();
-        return retdate
-    }
-
-    const isFileAttached = (f) => {
-        if (f.length == 0) return "No";
-        return "Yes"
-    }
-
     return (
         <div>
             <div>
@@ -43,10 +75,6 @@ const ServiceRequestComponent = ({ requestServiceFirst, requestsList, addRequest
             <hr />
             <table>
                 <tbody>
-                    <tr className="header-item-container">
-
-                    </tr>
-
                     <tr className="department-item-container">
                         <td className="item-name"><strong>Requested By</strong></td>
                         <td className="item-date"><strong>Requested</strong></td>
@@ -56,14 +84,16 @@ const ServiceRequestComponent = ({ requestServiceFirst, requestsList, addRequest
                         <td className="item-action"></td>
                     </tr>
                     {requestsList.map((req, index) => (
-                        <tr key={index} className="department-item-container">
-                            <td className="item-name"> {req.user.fullName}</td>
-                            <td className="item-date">{dateFormatter(req.createdAt)}</td>
-                            <td className="item-description">{req.description}</td>
-                            <td className="item-file">{isFileAttached(req.files)}</td>
-                            <td className="item-description">{req.status.description}</td>
-                            <td className="item-action"> <button className="actionbuttons"> <MdEdit /> </button> </td>
-                        </tr>
+                        <ServiceRequestItem
+                            key={index}
+                            fullName={req.user.fullName}
+                            createdAt={req.createdAt}
+                            description={req.description}
+                            files={req.files}
+                            status={req.status.description}
+                            requestID={req._id}
+                            statusID={req.status._id}
+                        />
                     ))}
                 </tbody>
             </table>
