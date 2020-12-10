@@ -24,7 +24,7 @@ const MainPanel = ({ usersRole, getInitData, logmeout }, props) => {
                 pullInitialData();
             }
         }
-    }, []);
+    }, [usersRole]);
 
     const pullInitialData = async () => {
         const initdata = await getInitialData();

@@ -1,14 +1,24 @@
 import { connect } from "react-redux";
-import React from "react";
+import React, { useState } from "react";
 import { MdDelete, MdAttachFile, MdEdit } from 'react-icons/md';
 import { getUsersList } from "../../../actions/userMgmtAction";
-import "./usermgmt.scss"
+import ReactPaginate from 'react-paginate';
+import "./usermgmt.scss";
 
-const UserManagementComponent = ({ usersList, getListofusers }) => {
+const UserManagementComponent = ({ usersList, getListofusers, totalUsers }) => {
+
+    const [pageCount, setPageCount] = useState(2);
+    const [currentPage, setCurrentPage] = useState("0");
+
+    const handlePageClick = (e) => {
+        const selectedPage = e.selected;
+        setCurrentPage(selectedPage.toString());
+    };
 
     React.useEffect(() => {
-        getListofusers({ pagevalue: "0" });
-    }, []);
+        getListofusers({ pagevalue: currentPage });
+        setPageCount(Math.ceil(totalUsers / 10));
+    }, [currentPage, totalUsers]);
 
     return (
         <div>
@@ -40,6 +50,18 @@ const UserManagementComponent = ({ usersList, getListofusers }) => {
                     ))}
                 </tbody>
             </table>
+            <div>
+                <ReactPaginate
+                    previousLabel={"prev"}
+                    nextLabel={"next"}
+                    breakLabel={"..."}
+                    breakClassName={"break-me"}
+                    pageCount={pageCount}
+                    onPageChange={handlePageClick}
+                    containerClassName={"pagination"}
+                    subContainerClassName={"pages pagination"}
+                    activeClassName={"active"} />
+            </div>
         </div>
     );
 };
@@ -49,7 +71,8 @@ const UserManagementComponent = ({ usersList, getListofusers }) => {
 
 const mapStateToProps = (state) => {
     return {
-        usersList: state.userManagementRed.usersData
+        usersList: state.userManagementRed.usersData,
+        totalUsers: state.userManagementRed.total
     };
 };
 

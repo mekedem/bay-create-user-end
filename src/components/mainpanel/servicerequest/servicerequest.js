@@ -12,7 +12,6 @@ const ServiceRequestComponent = ({ requestServiceFirst, requestsList, addRequest
     const [pageCount, setPageCount] = useState(2);
     const [currentPage, setCurrentPage] = useState("0");
 
-
     React.useEffect(() => {
         requestServiceFirst({ pagevalue: currentPage });
         setPageCount(Math.ceil(totalRequest / 10));

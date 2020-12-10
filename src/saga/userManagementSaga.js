@@ -9,7 +9,7 @@ const usersListRequestSaga = function* (action) {
     try {
         const response = yield call(getListOfUsers, pagevalue);
         if (response.success) {
-            yield put(usersListResponse(response.data.users));
+            yield put(usersListResponse(response.data.users, response.data.total));
         } else yield put(usersListError(response.message));
     } catch (error) {
         console.log("Connection Error happened", error);

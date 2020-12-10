@@ -6,10 +6,11 @@ export const getUsersList = ({ pagevalue }) => ({
     },
 });
 
-export const usersListResponse = (data) => ({
+export const usersListResponse = (data, total) => ({
     type: USERS_LIST_RESPONSE,
     payload: {
         data,
+        total
     },
 });
 
