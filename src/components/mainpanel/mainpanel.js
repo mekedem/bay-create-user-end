@@ -29,7 +29,7 @@ const MainPanel = ({ usersRole, getInitData, logmeout }, props) => {
     const pullInitialData = async () => {
         const initdata = await getInitialData();
         if (initdata.success) {
-            getInitData(initdata.data.user_info);
+            getInitData(initdata.data);
         }
         else {
             // sth happened 
