@@ -8,7 +8,8 @@ import {
 const initialState = {
     user_Info: [],
     ErrorMessage: "",
-    initialData: false
+    initialData: false,
+    statusList: []
 };
 
 const authenticationReducer = (state = initialState, action) => {
@@ -17,35 +18,41 @@ const authenticationReducer = (state = initialState, action) => {
             return {
                 user_Info: action.payload.data,
                 ErrorMessage: "",
+                initialData: state.initialData,
+                statusList: state.statusList
             };
 
         case SIGNUP_FAILURE:
             return {
                 user_Info: state.userInfo,
                 ErrorMessage: action.payload.message,
+                initialData: state.initialData,
+                statusList: state.statusList
             };
 
         case LOGIN_SUCCESS:
-            console.log("logintoken", action.payload.data.token);
             localStorage.setItem(USER_TOKEN, action.payload.data.token);
             return {
                 user_Info: action.payload.data.user_info,
                 ErrorMessage: "",
-                initialData: true
+                initialData: true,
+                statusList: state.statusList
             };
 
         case LOGIN_FAILURE:
             return {
                 user_Info: state.userInfo,
                 ErrorMessage: action.payload.message,
-                initialData: false
+                initialData: false,
+                statusList: state.statusList
             };
 
         case INITIALDATA_FETCHED:
             return {
-                user_Info: action.payload.data,
+                user_Info: action.payload.data.user_info,
                 ErrorMessage: "",
-                initialData: true
+                initialData: true,
+                statusList: action.payload.data.status
             };
 
         case LOGOUT_SUCCESS:
@@ -53,7 +60,8 @@ const authenticationReducer = (state = initialState, action) => {
             return {
                 user_Info: [],
                 ErrorMessage: "",
-                initialData: false
+                initialData: false,
+                statusList: state.statusList
             };
 
         default:
