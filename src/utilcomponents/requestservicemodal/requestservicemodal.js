@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import "./servicemodal.scss";
 import Modal from "../modals/modal";
 import * as Yup from "yup";
 import { Form, Field, Formik } from "formik";
 import { requireService } from "../../API/serviceRequestAPI";
+import MaterialDropZone from "../filehandlerform/materialdropzone";
 
 
 const requestSchema = () => {
@@ -17,7 +18,9 @@ const requestSchema = () => {
 
 
 
-const requestServiceModal = ({ handleClose, addRequest }) => {
+const RequestServiceModal = ({ handleClose, addRequest }) => {
+
+    const [fieldValue, setFieldValue] = useState("");
 
     const onSubmit = (values) => {
         setTimeout(() => {
@@ -51,7 +54,7 @@ const requestServiceModal = ({ handleClose, addRequest }) => {
                         <Form>
                             <div className="input-lable">
                                 <label>Description </label>
-                                <Field component="textarea" className="input-text" name="description" cols="45" rows="3" />
+                                <Field component="textarea" className="input-text" name="description" cols="45" rows="2" />
                                 {touched.description && errors.description && <p className="signinformerror">{errors.description}</p>}
                             </div>
                             <div className="input-lable">
@@ -62,7 +65,7 @@ const requestServiceModal = ({ handleClose, addRequest }) => {
                             </div>
                             <div className="input-lable">
                                 <label>Attach</label>
-                                <input type="file" className="fileuploadinput" />
+                                <MaterialDropZone name="file" onChange={setFieldValue} />
                             </div>
                             <div className="modal-footer">
                                 <button
@@ -84,4 +87,4 @@ const requestServiceModal = ({ handleClose, addRequest }) => {
     );
 }
 
-export default requestServiceModal
+export default RequestServiceModal
