@@ -1,16 +1,18 @@
 import { connect } from "react-redux";
 import React, { useState } from "react";
-import { MdEdit } from 'react-icons/md';
+import { MdEdit, MdViewAgenda } from 'react-icons/md';
 import { getServiceRequestAction, addServiceRequest } from "../../../actions/serviceReqAction";
 import "./servicerequest.scss";
 import RequestServiceModal from "../../../utilcomponents/requestservicemodal/requestservicemodal";
 import EditRequestModal from "../../../utilcomponents/editrequestmodal/editrequestmodal";
+import RequestDetailsModal from "../../../utilcomponents/viewrequestdetailmodal/viewrequestdetails";
 import ReactPaginate from 'react-paginate';
 
 
 const ServiceRequestItem = ({ fullName, createdAt, description, files, status, requestID, statusID }) => {
 
     const [showServiceEdit, setShowServiceEdit] = useState(false);
+    const [showServiceDetail, setShowServiceDetail] = useState(false);
 
     const dateFormatter = (d) => {
         const ddmmyy = new Date(d);
@@ -34,6 +36,9 @@ const ServiceRequestItem = ({ fullName, createdAt, description, files, status, r
                 <td className="item-action">
                     <button onClick={() => { setShowServiceEdit(true) }} className="actionbuttons"> <MdEdit /> </button>
                 </td>
+                <td className="item-action">
+                    <button onClick={() => { setShowServiceDetail(true) }} className="actionbuttons"> <MdViewAgenda /> </button>
+                </td>
                 {showServiceEdit && <EditRequestModal handleEditClose={setShowServiceEdit}
                     description={description}
                     files={files}
@@ -42,7 +47,11 @@ const ServiceRequestItem = ({ fullName, createdAt, description, files, status, r
                     statusID={statusID}
                 />}
 
-
+                {showServiceDetail && <RequestDetailsModal handleEditClose={setShowServiceDetail}
+                    description={description}
+                    files={files}
+                    status={status}
+                />}
             </tr>
         </>
     );

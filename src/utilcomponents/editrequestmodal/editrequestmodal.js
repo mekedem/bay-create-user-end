@@ -39,7 +39,8 @@ const EditRequestModal = ({ handleEditClose, description, files, status, request
             <div className="modal-body">
                 <Formik
                     initialValues={{
-                        description: description
+                        description: description,
+                        status: status
                     }}
                     validationSchema={requestSchema()}
                     onSubmit={onSubmit}
@@ -53,7 +54,7 @@ const EditRequestModal = ({ handleEditClose, description, files, status, request
                             </div>
                             <div className="input-lable">
                                 <label>Status </label>
-                                <Field className="requestStatus" component="select" name="status" placeholder="requesting">
+                                <Field className="requestStatus" component="select" name="status">
                                     {statusList.map((status) => {
                                         return <option key={status._id} value={status.description}>{status.description}</option>
                                     })}
