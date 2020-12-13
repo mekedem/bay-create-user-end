@@ -1,97 +1,101 @@
-import React, { Component } from 'react';
-import DropzoneComponent from 'react-dropzone-component';
-import 'dropzone/dist/min/dropzone.min.css';
+import React, { useMemo, useEffect, useState } from "react";
+import ReactDOM from "react-dom";
+import { useDropzone } from "react-dropzone";
+import './materialdropzone.scss';
 
-const ReactDOMServer = require('react-dom/server');
-
-const dropzoneComponentConfig = {
-  postUrl: 'https://filebin.net/ck02d9muwsuhushx',
+const baseStyle = {
+  flex: 1,
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  padding: "10px",
+  borderWidth: 2,
+  borderRadius: 2,
+  borderColor: "#eeeeee",
+  borderStyle: "dashed",
+  backgroundColor: "#fafafa",
+  color: "#bdbdbd",
+  outline: "none",
+  transition: "border .24s ease-in-out",
 };
 
-const dropzoneConfig = (onChange) => ({
-  thumbnailHeight: 50,
-  maxFilesize: 3,
-  addRemoveLinks: true,
-  paramName: 'material',
-  success: (data, response) => {
-    // console.log(response);
-    if (response.success) {
-      // onChange(response.data);
+const activeStyle = {
+  borderColor: "#2196f3"
+};
+
+const acceptStyle = {
+  borderColor: "#00e676"
+};
+
+const rejectStyle = {
+  borderColor: "#ff1744"
+};
+
+function MaterialDropzone({ files, setFiles }) {
+  const {
+    getRootProps,
+    getInputProps,
+    isDragActive,
+    isDragAccept,
+    isDragReject,
+    acceptedFiles,
+    open
+  } = useDropzone({
+    accept: "image/*",
+    noClick: true,
+    noKeyboard: true,
+    onDrop: acceptedFiles => {
+      setFiles(
+        acceptedFiles.map(file =>
+          Object.assign(file, {
+            preview: URL.createObjectURL(file)
+          })
+        )
+      );
     }
-  },
-  // complete: (data) => {
-  //   console.log('comp', data.upload);
-  //   onChange(data);
-  // },
-  removedfile: () => {
-    // console.log(onchange);
-    onChange({
-    });
-    return true;
-  },
-  previewTemplate: ReactDOMServer.renderToStaticMarkup(
-    <div className="dz-preview dz-file-preview mb-3">
-      <div className="d-flex flex-row ">
-        <div className="p-0 w-30 position-relative">
-          <div className="dz-error-mark">
-            <span>
-              <i />{' '}
-            </span>
-          </div>
-          <div className="dz-success-mark">
-            <span>
-              <i />
-            </span>
-          </div>
-          <div className="preview-container">
-            {/*  eslint-disable-next-line jsx-a11y/alt-text */}
-            <img data-dz-thumbnail className="img-thumbnail border-0" />
-            <i className="simple-icon-doc preview-icon" />
-          </div>
-        </div>
-        <div className="pl-3 pt-2 pr-2 pb-1 w-70 dz-details position-relative">
-          <div>
-            {' '}
-            <span data-dz-name />{' '}
-          </div>
-          <div className="text-primary text-extra-small" data-dz-size />
-          <div className="dz-progress">
-            <span className="dz-upload" data-dz-uploadprogress />
-          </div>
-          <div className="dz-error-message">
-            <span data-dz-errormessage />
-          </div>
-        </div>
+  });
+
+  const mainOpen = (e) => {
+    e.preventDefault();
+    open(e)
+  }
+
+  const style = useMemo(
+    () => ({
+      ...baseStyle,
+      ...(isDragActive ? activeStyle : {}),
+      ...(isDragAccept ? acceptStyle : {}),
+      ...(isDragReject ? rejectStyle : {})
+    }),
+    [isDragActive, isDragReject]
+  );
+
+  useEffect(
+    () => () => {
+      // Make sure to revoke the data uris to avoid memory leaks
+      files.forEach(file => URL.revokeObjectURL(file.preview));
+    },
+    [files]
+  );
+
+  const filepath = acceptedFiles.map(file => (
+    <li key={file.path} className="fileitemslist">
+      . {file.path} - {file.size} bytes
+    </li>
+  ));
+
+  return (
+    <div className="container">
+      <div {...getRootProps({ style })}>
+        <input {...getInputProps()} />
+        <button onClick={mainOpen}>Add files here or drag</button>
       </div>
-      <a href="#/" className="remove" data-dz-remove>
-        {' '}
-        <i className="glyph-icon simple-icon-trash" />{' '}
-      </a>
+      <aside>
+        <p className="attachfiles">Files</p>
+        <ul className="listoffileshere">{filepath}</ul>
+      </aside>
     </div>
-  ),
-  headers: { 'My-Awesome-Header': 'header value' },
-});
-
-export default class MaterialDropZone extends Component {
-  clear() {
-    this.myDropzone.removeAllFiles(true);
-  }
-
-  render() {
-    const config = dropzoneConfig((data) =>
-      this.props.onChange(this.props.name, data)
-    );
-    return (
-      <DropzoneComponent
-        config={dropzoneComponentConfig}
-        djsConfig={config}
-        eventHandlers={{
-          init: (dropzone) => {
-            this.myDropzone = dropzone;
-          },
-          removedfile: this.clear,
-        }}
-      />
-    );
-  }
+  );
 }
+
+export default MaterialDropzone

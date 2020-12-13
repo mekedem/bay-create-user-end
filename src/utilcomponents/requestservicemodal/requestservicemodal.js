@@ -20,14 +20,13 @@ const requestSchema = () => {
 
 const RequestServiceModal = ({ handleClose, addRequest }) => {
 
-    const [fieldValue, setFieldValue] = useState("");
+    const [files, setFiles] = useState([]);
 
     const onSubmit = (values) => {
         setTimeout(() => {
-            requireService({ description: values.description, files: [] })
+            requireService({ description: values.description, files: files })
                 .then((response) => {
                     if (response.success) {
-                        console.log(response);
                         addRequest(response.data);
                         handleClose();
                     }
@@ -65,7 +64,7 @@ const RequestServiceModal = ({ handleClose, addRequest }) => {
                             </div>
                             <div className="input-lable">
                                 <label>Attach</label>
-                                <MaterialDropZone name="file" onChange={setFieldValue} />
+                                <MaterialDropZone name="file" setFiles={setFiles} files={files} />
                             </div>
                             <div className="modal-footer">
                                 <button
