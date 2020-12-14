@@ -22,10 +22,12 @@ export const getInitialData = () => {
 
 export const getDownloadFile = async (fileurl) => {
     const url = baseURL + fileurl;
-    console.log(url);
-    return axios.get(`${baseURL}${fileurl}`, {
+    const token = localStorage.getItem(USER_TOKEN);
+
+    return axios.get(url, {
         responseType: 'blob',
-    }).then(response => response.blob())
+        headers: { Authorization: token, }
+    });
 }
 
 export const requireService = (request) => {
