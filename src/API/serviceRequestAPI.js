@@ -20,13 +20,25 @@ export const getInitialData = () => {
     return axios.get(url, { headers: { Authorization: token, something: 'this is' } }).then(d => d.data);
 }
 
-export const getDownloadFile = async (fileurl) => {
+export const getDownloadFile = (fileurl, filename) => {
     const url = baseURL + fileurl;
     const token = localStorage.getItem(USER_TOKEN);
 
-    return axios.get(url, {
+    axios.get(url, {
         responseType: 'blob',
         headers: { Authorization: token, }
+    }).then(function (response) {
+        const url = window.URL.createObjectURL(
+            new Blob([response.data], {
+                type: response.headers["content-type"],
+            })
+        );
+
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", filename);
+        document.body.appendChild(link);
+        link.click();
     });
 }
 
