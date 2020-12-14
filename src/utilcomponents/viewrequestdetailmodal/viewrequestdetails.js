@@ -3,13 +3,13 @@ import "./requestdetails.scss";
 import Modal from "../modals/modal";
 import { MdFileDownload } from 'react-icons/md';
 import { getDownloadFile } from '../../API/serviceRequestAPI';
-import { saveAs } from 'file-saver'
+import { saveAs } from 'file-saver';
 
 const RequestDetailsModal = ({ handleEditClose, description, files, status }) => {
 
     const downloadFile = (filename, fileurl) => {
-        // getDownloadFile(fileurl + "/" + filename)
-        //     .then(blob => saveAs(blob, './' + filename + '.jpg'))
+        getDownloadFile(fileurl + "/" + filename)
+            .then(blob => saveAs(blob, './' + filename + '.png'))
     }
 
     //   return (

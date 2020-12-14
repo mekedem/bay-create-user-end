@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import React, { useState } from "react";
-import { MdEdit, MdViewAgenda } from 'react-icons/md';
+import { MdEdit, MdViewAgenda, MdVisibility } from 'react-icons/md';
 import { getServiceRequestAction, addServiceRequest } from "../../../actions/serviceReqAction";
 import "./servicerequest.scss";
 import RequestServiceModal from "../../../utilcomponents/requestservicemodal/requestservicemodal";
@@ -16,7 +16,7 @@ const ServiceRequestItem = ({ fullName, createdAt, description, files, status, r
 
     const dateFormatter = (d) => {
         const ddmmyy = new Date(d);
-        const retdate = ddmmyy.getDay() + "/" + ddmmyy.getMonth() + "/" + ddmmyy.getFullYear();
+        const retdate = ddmmyy.getDate() + "/" + ddmmyy.getMonth() + "/" + ddmmyy.getFullYear();
         return retdate
     }
 
@@ -37,7 +37,7 @@ const ServiceRequestItem = ({ fullName, createdAt, description, files, status, r
                     <button onClick={() => { setShowServiceEdit(true) }} className="actionbuttons"> <MdEdit /> </button>
                 </td>
                 <td className="item-action">
-                    <button onClick={() => { setShowServiceDetail(true) }} className="actionbuttons"> <MdViewAgenda /> </button>
+                    <button onClick={() => { setShowServiceDetail(true) }} className="actionbuttons"> <MdVisibility /> </button>
                 </td>
                 {showServiceEdit && <EditRequestModal handleEditClose={setShowServiceEdit}
                     description={description}

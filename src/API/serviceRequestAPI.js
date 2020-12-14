@@ -21,6 +21,8 @@ export const getInitialData = () => {
 }
 
 export const getDownloadFile = async (fileurl) => {
+    const url = baseURL + fileurl;
+    console.log(url);
     return axios.get(`${baseURL}${fileurl}`, {
         responseType: 'blob',
     }).then(response => response.blob())
@@ -32,13 +34,11 @@ export const requireService = (request) => {
 
     var bodyFormData = new FormData();
     bodyFormData.append('description', request.description);
-    bodyFormData.append('files', request.files);
-    return axios({
-        method: 'post',
-        url: url,
-        data: bodyFormData,
-        headers: { 'Content-Type': 'multipart/form-data', Authorization: token }
-    })
+    for (var x = 0; x < request.files.length; x++) {
+        bodyFormData.append('files', request.files[x])
+    }
+
+    return axios.post(url, bodyFormData, { headers: { 'Content-Type': 'multipart/form-data', Authorization: token } })
         .then(d => d.data)
         .catch(function (response) {
             console.log(response);
