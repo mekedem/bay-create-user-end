@@ -8,7 +8,7 @@ import { saveAs } from 'file-saver';
 const RequestDetailsModal = ({ handleEditClose, description, files, status }) => {
 
     const downloadFile = (filename, fileurl) => {
-        getDownloadFile(fileurl + "/" + filename)
+        getDownloadFile(fileurl)
             .then(blob => saveAs(blob, './' + filename + '.png'))
     }
 
