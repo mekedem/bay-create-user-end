@@ -32,7 +32,7 @@ const RequestServiceModal = ({ handleClose, addRequest }) => {
                     }
                 })
                 .catch((error) => {
-                    alert("error while adding you request... retry");
+                    alert("error while adding your request... retry");
                 })
                 .then(() => { });
         }, 600);
@@ -53,7 +53,7 @@ const RequestServiceModal = ({ handleClose, addRequest }) => {
                         <Form>
                             <div className="input-lable">
                                 <label>Description </label>
-                                <Field component="textarea" className="input-text" name="description" cols="45" rows="2" />
+                                <Field component="textarea" className="input-text" name="description" cols="47" rows="2" />
                                 {touched.description && errors.description && <p className="signinformerror">{errors.description}</p>}
                             </div>
                             <div className="input-lable">

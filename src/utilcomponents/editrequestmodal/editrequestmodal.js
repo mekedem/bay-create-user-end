@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import "./editrequestmodal.scss";
 import Modal from "../modals/modal";
 import * as Yup from "yup";
 import { connect } from "react-redux";
 import { Form, Field, Formik } from "formik";
+import { MdClear } from "react-icons/md";
+import { editRequestService } from "../../API/serviceRequestAPI";
+import MaterialDropZone from "../filehandlerform/materialdropzone";
 
 const requestSchema = () => {
     return Yup.object().shape({
@@ -14,23 +17,31 @@ const requestSchema = () => {
     });
 };
 
-const EditRequestModal = ({ handleEditClose, description, files, status, requestID, statusID, statusList }) => {
+const EditRequestModal = ({ handleEditClose, description, existingfiles, status, requestID, statusID, statusList }) => {
+
+    const [files, setFiles] = useState([]);
+    const [uploadedfiles, setuploadedfiles] = useState(existingfiles);
+
+    const removeExistingFile = (rfilename) => {
+        const tempfiles = uploadedfiles.filter(({ filename }) => filename !== rfilename);
+        setuploadedfiles(tempfiles);
+    }
 
     const onSubmit = (values) => {
-        // setTimeout(() => {
-        //     requireService({ description: values.description, files: [] })
-        //         .then((response) => {
-        //             if (response.success) {
-        //                 console.log(response);
-        //                 addRequest(response.data);
-        //                 handleClose();
-        //             }
-        //         })
-        //         .catch((error) => {
-        //             alert("error while adding you request... retry");
-        //         })
-        //         .then(() => { });
-        // }, 600);
+        setTimeout(() => {
+            editRequestService({ description: values.description, files: files, statusID: values.status, requestID: requestID })
+                .then((response) => {
+                    if (response.success) {
+                        // addRequest(response.data);
+                        handleEditClose();
+                    }
+                })
+                .catch((error) => {
+                    alert("error while editing your request... retry");
+                    console.log(error);
+                })
+                .then(() => { });
+        }, 600);
     };
 
     return (
@@ -40,7 +51,7 @@ const EditRequestModal = ({ handleEditClose, description, files, status, request
                 <Formik
                     initialValues={{
                         description: description,
-                        status: status
+                        status: statusID
                     }}
                     validationSchema={requestSchema()}
                     onSubmit={onSubmit}
@@ -49,20 +60,25 @@ const EditRequestModal = ({ handleEditClose, description, files, status, request
                         <Form>
                             <div className="input-lable">
                                 <label>Description </label>
-                                <Field component="textarea" className="input-text" name="description" cols="45" rows="3" />
+                                <Field component="textarea" className="input-text" name="description" cols="47" rows="3" />
                                 {touched.description && errors.description && <p className="signinformerror">{errors.description}</p>}
                             </div>
                             <div className="input-lable">
                                 <label>Status </label>
                                 <Field className="requestStatus" component="select" name="status">
-                                    {statusList.map((status) => {
-                                        return <option key={status._id} value={status.description}>{status.description}</option>
+                                    {statusList.map((statusitem) => {
+                                        return <option key={statusitem._id} value={statusitem._id}>{statusitem.description}</option>
                                     })}
                                 </Field>
                             </div>
+                            <div className="prev-files">
+                                {uploadedfiles.map((uploadedfile) => {
+                                    return <div className="prev-uploaded" onClick={() => removeExistingFile(uploadedfile.filename)}>{uploadedfile.filename} <span id="iconid"><MdClear /></span></div>
+                                })}
+                            </div>
                             <div className="input-lable">
                                 <label>Attach</label>
-                                <input type="file" className="fileuploadinput" />
+                                <MaterialDropZone name="file" setFiles={setFiles} files={files} />
                             </div>
                             <div className="modal-footer">
                                 <button

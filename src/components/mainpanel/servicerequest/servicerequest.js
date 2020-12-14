@@ -41,7 +41,7 @@ const ServiceRequestItem = ({ fullName, createdAt, description, files, status, r
                 </td>
                 {showServiceEdit && <EditRequestModal handleEditClose={setShowServiceEdit}
                     description={description}
-                    files={files}
+                    existingfiles={files}
                     status={status}
                     requestID={requestID}
                     statusID={statusID}

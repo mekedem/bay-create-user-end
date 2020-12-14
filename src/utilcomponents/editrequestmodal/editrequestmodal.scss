@@ -10,6 +10,7 @@
   
   .modal-body {
     min-width: 400px;
+    max-width: 400px;
   
     .input-text {
       resize: none;
@@ -29,6 +30,25 @@
       padding-top: 10px;
       padding-bottom: 10px;
       font-size: 1.15em;
+    }
+
+    .prev-files{
+      font-family: Arial;
+      font-size: 14px;
+
+      .prev-uploaded{
+        font-size: 12px;
+        background-color: #ddd;
+        border: none;
+        color: black;
+        padding: 2px 5px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 5px;
+      }
     }
   }
   
