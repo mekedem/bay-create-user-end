@@ -1,12 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import './signup.scss';
 import * as Yup from "yup";
 import { withFormik, Form, Field } from "formik";
 import { withRouter } from "react-router-dom/cjs/react-router-dom.min";
 import { connect } from 'react-redux';
 import { signupRequested } from '../../actions/authActions';
+import { useHistory } from "react-router-dom";
 
-const SignupComponent = ({ errors, touched }) => {
+const SignupComponent = ({ errors, touched, signupInfo }) => {
+
+    const [serverError, setServerError] = React.useState('');
+    const history = useHistory();
+
+    React.useEffect(() => {
+        if (signupInfo.ErrorMessage) {
+            const err = signupInfo.ErrorMessage;
+            setServerError(err);
+        }
+    }, [signupInfo.ErrorMessage]);
+
+    const gotoLogin = () => {
+        history.push('/login');
+    }
 
     return (
         <div className="signupflexcontainer">
@@ -16,6 +31,7 @@ const SignupComponent = ({ errors, touched }) => {
                     <div className="signupinputfield-container">
                         <h1 className="signuptitle">New User Registration</h1>
 
+                        <p className="signupformerror">{serverError}</p>
                         {touched.email && errors.email && <p className="signupformerror">{errors.email}</p>}
                         <Field type="email" placeholder="Email" name="email" />
 
@@ -29,7 +45,7 @@ const SignupComponent = ({ errors, touched }) => {
                         <Field type="password" placeholder="Password" name="password" />
 
                         <button className="signupbtn" type="submit">Sign Up</button>
-                        <span id="signinlink"> Sign-in to your members account </span>
+                        <span id="signinlink" onClick={gotoLogin}> Sign-in to your members account </span>
                     </div>
                 </Form>
 
@@ -66,9 +82,8 @@ const Signup = withRouter(withFormik({
 
 // signupDefaultState
 const mapStateToProps = (state) => {
-    console.log("mapstatetoprops", state);
     return {
-        signupInfo: state
+        signupInfo: state.authenticationRed
     };
 };
 

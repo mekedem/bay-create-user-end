@@ -12,6 +12,9 @@ export const signupuser = async (signupCredentials) => {
     if (response.ok) {
         return await response.json();
     } else {
+        if (response.status == 400) {
+            return await response.json();
+        }
         throw new Error("Unexpected error!!!");
     }
 }
