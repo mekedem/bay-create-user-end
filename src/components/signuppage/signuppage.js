@@ -28,9 +28,6 @@ const SignupComponent = ({ errors, touched }) => {
                         {touched.password && errors.password && <p className="signupformerror">{errors.password}</p>}
                         <Field type="password" placeholder="Password" name="password" />
 
-                        {touched.affiliationcode && errors.affiliationcode && <p className="signupformerror">{errors.affiliationcode}</p>}
-                        <Field type="text" placeholder="Affiliation Code" name="affiliationcode" />
-
                         <button className="signupbtn" type="submit">Sign Up</button>
                         <span id="signinlink"> Sign-in to your members account </span>
                     </div>
@@ -42,12 +39,11 @@ const SignupComponent = ({ errors, touched }) => {
 };
 
 const Signup = withRouter(withFormik({
-    mapPropsToValues({ email, password, fullname, affiliationcode, phonenumber }) {
+    mapPropsToValues({ email, password, fullname, phonenumber }) {
         return {
             email: email || '',
             password: password || '',
             fullname: fullname || '',
-            affiliationcode: affiliationcode || '',
             phonenumber: phonenumber || ''
         }
     },
@@ -55,7 +51,6 @@ const Signup = withRouter(withFormik({
     validationSchema: Yup.object().shape({
         email: Yup.string().email().required("*required"),
         password: Yup.string().min(8).max(50).required("*required"),
-        affiliationcode: Yup.string().required("*required"),
         phonenumber: Yup.string().required("*required").matches(/^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/, "phone number not valid"),
         fullname: Yup.string().min(3).required("*required").test("username", "Name should contain first name and last name", (fullname) => {
             return fullname && fullname.trim().split(" ").length === 2;
