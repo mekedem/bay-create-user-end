@@ -34,8 +34,6 @@ const serviceRequestReducer = (state = initialState, action) => {
             const updatedRequestData = { ...state };
             const newData = [];
             newData.push(action.payload.data);
-
-            updatedRequestData.total = state.total;
             updatedRequestData.requestData = updatedRequestData.requestData.map(obj => newData.find(o => o._id === obj._id) || obj);
 
             return updatedRequestData;

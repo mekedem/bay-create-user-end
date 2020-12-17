@@ -4,7 +4,6 @@ import * as Yup from "yup";
 import { withFormik, Form, Field } from "formik";
 import { withRouter } from "react-router-dom/cjs/react-router-dom.min";
 import { signinRequested } from "../../actions/authActions";
-import { USER_TOKEN } from "../../constants/constants";
 import { connect } from 'react-redux';
 import { useHistory } from "react-router-dom";
 
@@ -14,12 +13,13 @@ const SigninComponent = ({ errors, touched, signInInfo }) => {
     const history = useHistory();
 
     React.useEffect(() => {
-        if (localStorage.getItem(USER_TOKEN)) history.push('/');
-        if (signInInfo.ErrorMessage) {
-            const err = signInInfo.ErrorMessage;
+        if (signInInfo.LoginError) {
+            const err = signInInfo.LoginError;
             setServerError(err);
         }
-    }, [signInInfo.ErrorMessage]);
+
+
+    }, [signInInfo.LoginError]);
 
     const gotoSignup = () => {
         history.push('/signup');

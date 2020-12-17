@@ -30,6 +30,9 @@ export const signinuser = async (signinCredentials) => {
         return await response.json();
     }
     catch {
+        if (response.status == 400) {
+            return await response.json();
+        }
         throw new Error("Unexpected error!!!");
     }
 

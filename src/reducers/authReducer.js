@@ -9,7 +9,9 @@ const initialState = {
     user_Info: [],
     ErrorMessage: "",
     initialData: false,
-    statusList: []
+    statusList: [],
+    LoginError: "",
+    SignupError: ""
 };
 
 const authenticationReducer = (state = initialState, action) => {
@@ -19,7 +21,9 @@ const authenticationReducer = (state = initialState, action) => {
                 user_Info: action.payload.data,
                 ErrorMessage: "",
                 initialData: state.initialData,
-                statusList: state.statusList
+                statusList: state.statusList,
+                LoginError: "",
+                SignupError: ""
             };
 
         case SIGNUP_FAILURE:
@@ -27,7 +31,9 @@ const authenticationReducer = (state = initialState, action) => {
                 user_Info: state.userInfo,
                 ErrorMessage: action.payload.message,
                 initialData: state.initialData,
-                statusList: state.statusList
+                statusList: state.statusList,
+                LoginError: "",
+                SignupError: action.payload.message
             };
 
         case LOGIN_SUCCESS:
@@ -36,7 +42,9 @@ const authenticationReducer = (state = initialState, action) => {
                 user_Info: action.payload.data.user_info,
                 ErrorMessage: "",
                 initialData: true,
-                statusList: state.statusList
+                statusList: action.payload.data.status,
+                LoginError: "",
+                SignupError: ""
             };
 
         case LOGIN_FAILURE:
@@ -44,7 +52,9 @@ const authenticationReducer = (state = initialState, action) => {
                 user_Info: state.userInfo,
                 ErrorMessage: action.payload.message,
                 initialData: false,
-                statusList: state.statusList
+                statusList: state.statusList,
+                LoginError: action.payload.message,
+                SignupError: ""
             };
 
         case INITIALDATA_FETCHED:
@@ -52,7 +62,9 @@ const authenticationReducer = (state = initialState, action) => {
                 user_Info: action.payload.data.user_info,
                 ErrorMessage: "",
                 initialData: true,
-                statusList: action.payload.data.status
+                statusList: action.payload.data.status,
+                LoginError: "",
+                SignupError: ""
             };
 
         case LOGOUT_SUCCESS:
@@ -61,7 +73,9 @@ const authenticationReducer = (state = initialState, action) => {
                 user_Info: [],
                 ErrorMessage: "",
                 initialData: false,
-                statusList: state.statusList
+                statusList: state.statusList,
+                LoginError: "",
+                SignupError: ""
             };
 
         default:

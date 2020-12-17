@@ -49,7 +49,7 @@ const MainPanel = ({ usersRole, getInitData, logmeout, isInitialDataFetched }, p
     }
 
     return (
-        !usersRole.initialData ? <div>Loading...</div> :
+        !initialDataFetched ? <div>Loading...</div> :
             <div className="wrapper">
                 <div className="sidenav">
                     <img className="logoimg" src="./bayerlogo.png" width="200" height="100" />

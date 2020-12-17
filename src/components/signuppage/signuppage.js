@@ -13,11 +13,11 @@ const SignupComponent = ({ errors, touched, signupInfo }) => {
     const history = useHistory();
 
     React.useEffect(() => {
-        if (signupInfo.ErrorMessage) {
-            const err = signupInfo.ErrorMessage;
+        if (signupInfo.SignupError) {
+            const err = signupInfo.SignupError;
             setServerError(err);
         }
-    }, [signupInfo.ErrorMessage]);
+    }, [signupInfo.SignupError]);
 
     const gotoLogin = () => {
         history.push('/login');
