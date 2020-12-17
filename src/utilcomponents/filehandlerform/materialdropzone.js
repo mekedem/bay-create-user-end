@@ -41,7 +41,7 @@ function MaterialDropzone({ files, setFiles }) {
     acceptedFiles,
     open
   } = useDropzone({
-    accept: "image/*",
+    accept: "image/*,.doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf",
     noClick: true,
     noKeyboard: true,
     onDrop: acceptedFiles => {
