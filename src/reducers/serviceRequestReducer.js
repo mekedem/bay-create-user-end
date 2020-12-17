@@ -1,5 +1,5 @@
 import "../constants/constants";
-import { SERVICE_REQUEST_RESPONSE, SERVICE_REQUEST_ERROR, ADD_SERVICE_REQUEST } from "../constants/constants";
+import { SERVICE_REQUEST_RESPONSE, SERVICE_REQUEST_ERROR, ADD_SERVICE_REQUEST, UPDATE_SERVICE_REQUEST } from "../constants/constants";
 
 const initialState = {
     requestData: [],
@@ -29,6 +29,16 @@ const serviceRequestReducer = (state = initialState, action) => {
             newRequestData.requestData.unshift(action.payload.data);
 
             return newRequestData;
+
+        case UPDATE_SERVICE_REQUEST:
+            const updatedRequestData = { ...state };
+            const newData = [];
+            newData.push(action.payload.data);
+
+            updatedRequestData.total = state.total;
+            updatedRequestData.requestData = updatedRequestData.requestData.map(obj => newData.find(o => o._id === obj._id) || obj);
+
+            return updatedRequestData;
         default:
             return state;
     }

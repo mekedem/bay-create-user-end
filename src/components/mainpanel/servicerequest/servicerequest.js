@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import React, { useState } from "react";
 import { MdEdit, MdViewAgenda, MdVisibility } from 'react-icons/md';
-import { getServiceRequestAction, addServiceRequest } from "../../../actions/serviceReqAction";
+import { getServiceRequestAction, addServiceRequest, updateServiceRequest } from "../../../actions/serviceReqAction";
 import "./servicerequest.scss";
 import RequestServiceModal from "../../../utilcomponents/requestservicemodal/requestservicemodal";
 import EditRequestModal from "../../../utilcomponents/editrequestmodal/editrequestmodal";
@@ -9,7 +9,7 @@ import RequestDetailsModal from "../../../utilcomponents/viewrequestdetailmodal/
 import ReactPaginate from 'react-paginate';
 
 
-const ServiceRequestItem = ({ fullName, createdAt, description, files, status, requestID, statusID }) => {
+const ServiceRequestItem = ({ fullName, createdAt, description, files, status, requestID, statusID, updateRequest }) => {
 
     const [showServiceEdit, setShowServiceEdit] = useState(false);
     const [showServiceDetail, setShowServiceDetail] = useState(false);
@@ -45,6 +45,7 @@ const ServiceRequestItem = ({ fullName, createdAt, description, files, status, r
                     status={status}
                     requestID={requestID}
                     statusID={statusID}
+                    updateRequest={updateRequest}
                 />}
 
                 {showServiceDetail && <RequestDetailsModal handleEditClose={setShowServiceDetail}
@@ -58,7 +59,7 @@ const ServiceRequestItem = ({ fullName, createdAt, description, files, status, r
 };
 
 
-const ServiceRequestComponent = ({ requestServiceFirst, requestsList, addRequest, role, totalRequest }) => {
+const ServiceRequestComponent = ({ requestServiceFirst, requestsList, addRequest, role, totalRequest, updateRequest }) => {
 
     const [showModal, setShowModal] = useState(false);
     const [pageCount, setPageCount] = useState(2);
@@ -102,6 +103,7 @@ const ServiceRequestComponent = ({ requestServiceFirst, requestsList, addRequest
                             status={req.status.description}
                             requestID={req._id}
                             statusID={req.status._id}
+                            updateRequest={updateRequest}
                         />
                     ))}
                 </tbody>
@@ -138,6 +140,9 @@ const mapDispatchToProps = (dispatch) => ({
     },
     addRequest: (data) => {
         dispatch(addServiceRequest(data));
+    },
+    updateRequest: (data) => {
+        dispatch(updateServiceRequest(data));
     }
 });
 

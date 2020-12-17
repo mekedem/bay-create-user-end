@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import { connect } from "react-redux";
 import { Form, Field, Formik } from "formik";
 import { MdClear } from "react-icons/md";
+import { updateServiceRequest } from "../../actions/serviceReqAction";
 import { editRequestService } from "../../API/serviceRequestAPI";
 import MaterialDropZone from "../filehandlerform/materialdropzone";
 
@@ -17,7 +18,7 @@ const requestSchema = () => {
     });
 };
 
-const EditRequestModal = ({ handleEditClose, description, existingfiles, status, requestID, statusID, statusList }) => {
+const EditRequestModal = ({ handleEditClose, description, existingfiles, status, requestID, statusID, statusList, updateRequest }) => {
 
     const [files, setFiles] = useState([]);
     const [uploadedfiles, setuploadedfiles] = useState(existingfiles);
@@ -32,7 +33,7 @@ const EditRequestModal = ({ handleEditClose, description, existingfiles, status,
             editRequestService({ description: values.description, files: files, statusID: values.status, requestID: requestID })
                 .then((response) => {
                     if (response.success) {
-                        // addRequest(response.data);
+                        updateRequest(response.data);
                         handleEditClose();
                     }
                 })
@@ -102,7 +103,6 @@ const EditRequestModal = ({ handleEditClose, description, existingfiles, status,
 
 
 const mapStateToProps = (state) => {
-
     return {
         statusList: state.authenticationRed.statusList,
     };

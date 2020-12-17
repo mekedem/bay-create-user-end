@@ -59,12 +59,9 @@ export const requireService = (request) => {
         });
 }
 
-// "{{local_url}}/requests/5fd5d5a7d4e76e1718c9f680"
 export const editRequestService = (request) => {
     const token = localStorage.getItem(USER_TOKEN);
     const url = baseURL + `/${GETSERVICEREQUEST_URL}/${request.requestID}`;
-
-    console.log(request.statusID);
 
     var bodyFormData = new FormData();
     bodyFormData.append('description', request.description);
