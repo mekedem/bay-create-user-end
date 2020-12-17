@@ -11,19 +11,22 @@ import "./mainpanel.scss";
 import { USER_TOKEN } from "../../constants/constants";
 
 
-const MainPanel = ({ usersRole, getInitData, logmeout }, props) => {
+const MainPanel = ({ usersRole, getInitData, logmeout, isInitialDataFetched }, props) => {
     const location = useLocation();
     const history = useHistory();
     const [isUser, setIsUser] = React.useState(true);
 
     React.useEffect(() => {
-        if (usersRole.user_Info.role === "admin") setIsUser(false);
-        if (usersRole.initialData) { }
-        else {
-            if (localStorage.getItem(USER_TOKEN)) {
-                pullInitialData();
-            }
+        if (localStorage.getItem(USER_TOKEN)) {
+            if (!isInitialDataFetched) pullInitialData();
         }
+        if (usersRole.user_Info.role === "admin") setIsUser(false);
+        // if (usersRole.initialData) { }
+        // else {
+        //     // if (localStorage.getItem(USER_TOKEN)) {
+        //     //     pullInitialData();
+        //     // }
+        // }
     }, [usersRole]);
 
     const pullInitialData = async () => {
@@ -75,7 +78,8 @@ const MainPanel = ({ usersRole, getInitData, logmeout }, props) => {
 
 const mapStateToProps = (state) => {
     return {
-        usersRole: state.authenticationRed
+        usersRole: state.authenticationRed,
+        isInitialDataFetched: state.authenticationRed.initialData
     };
 };
 
