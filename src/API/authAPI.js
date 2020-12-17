@@ -8,7 +8,7 @@ export const signupuser = async (signupCredentials) => {
         body: JSON.stringify(signupCredentials)
     };
 
-    let response = await fetch(`${baseURL}/${SIGNUP_URL}`, requestOptions)
+    let response = await fetch(`${baseURL}/${SIGNUP_URL}`, requestOptions);
     if (response.ok) {
         return await response.json();
     } else {
@@ -25,8 +25,8 @@ export const signinuser = async (signinCredentials) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(signinCredentials)
     };
+    let response = await fetch(`${baseURL}/${LOGIN_URL}`, requestOptions);
     try {
-        let response = await fetch(`${baseURL}/${LOGIN_URL}`, requestOptions)
         return await response.json();
     }
     catch {
