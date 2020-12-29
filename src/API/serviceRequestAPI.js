@@ -14,6 +14,12 @@ export const getListOfUsers = (pagevalue) => {
     return axios.get(url, { headers: { Authorization: token, } }).then(d => d.data);
 };
 
+export const removeUserFromList = (userid) => {
+    const token = localStorage.getItem(USER_TOKEN);
+    const url = baseURL + `/${GETLISTOFUSERS_URL}/${userid}`;
+    return axios.delete(url, { headers: { Authorization: token, } }).then(d => d.data);
+}
+
 export const getInitialData = () => {
     const token = localStorage.getItem(USER_TOKEN);
     const url = baseURL + `/${GETINITIALDATA_URL}`;

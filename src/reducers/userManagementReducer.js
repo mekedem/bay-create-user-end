@@ -1,5 +1,5 @@
 import "../constants/constants";
-import { USERS_LIST_RESPONSE, USERS_LIST_ERROR } from "../constants/constants";
+import { USERS_LIST_RESPONSE, USERS_LIST_ERROR, REMOVE_USER } from "../constants/constants";
 
 const initialState = {
     usersData: [],
@@ -21,6 +21,15 @@ const userManagementReducer = (state = initialState, action) => {
                 usersData: action.payload,
                 ErrorMessage: action.payload.message,
                 total: 0
+            }
+
+        case REMOVE_USER:
+            const currentStat = state.usersData.filter(({ _id }) => _id == action.payload.userid);
+
+            return {
+                usersData: currentStat,
+                ErrorMessage: state.ErrorMessage,
+                total: state.total - 1
             }
 
         default:

@@ -44,7 +44,7 @@ const SignupComponent = ({ errors, touched, signupInfo }) => {
                         {touched.password && errors.password && <p className="signupformerror">{errors.password}</p>}
                         <Field type="password" placeholder="Password" name="password" />
 
-                        <button className="signupbtn" type="submit">Sign Up</button>
+                        <button className="signupbtn" type="submit">Register</button>
                         <span id="signinlink" onClick={gotoLogin}> Sign-in to your members account </span>
                     </div>
                 </Form>

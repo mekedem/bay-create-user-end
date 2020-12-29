@@ -1,4 +1,4 @@
-import { USERS_LIST_REQUEST, USERS_LIST_RESPONSE, USERS_LIST_ERROR } from "../constants/constants";
+import { USERS_LIST_REQUEST, USERS_LIST_RESPONSE, USERS_LIST_ERROR, REMOVE_USER } from "../constants/constants";
 export const getUsersList = ({ pagevalue }) => ({
     type: USERS_LIST_REQUEST,
     payload: {
@@ -11,6 +11,13 @@ export const usersListResponse = (data, total) => ({
     payload: {
         data,
         total
+    },
+});
+
+export const removeUser = (userid) => ({
+    type: REMOVE_USER,
+    payload: {
+        userid
     },
 });
 
