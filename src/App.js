@@ -4,6 +4,7 @@ import Signup from "./components/signuppage/signuppage";
 import Login from "./components/loginpage/loginpage";
 import ForgotPassword from "./components/forgotpassword/forgotpassword";
 import MainPanel from "./components/mainpanel/mainpanel";
+import VerifyEmail from "./components/verificationpage/verifyemail";
 import ProtectedRoute from "./protectedRoutes";
 
 
@@ -28,6 +29,11 @@ const App = () => {
             path="/forgotpassword"
             name="forgotpassword"
             component={(props) => <ForgotPassword {...props} />}
+          />
+          <Route
+            path="/verifyemail"
+            name="verifyemail"
+            component={(props) => <VerifyEmail {...props} />}
           />
           <ProtectedRoute
             path="/"
