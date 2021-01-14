@@ -76,26 +76,20 @@
     font-size: 18px;
   }
   
-  #remembermetext{
+  #forgotpass{
+    float: right;
       font-weight: bold;
+      font-size: 15px;
       font-family: 'Karla', sans-serif;
       color: #262f3c;
+      cursor: pointer;
   }
 
-  #forgetpassword{
-      float: right;
+  #notmemberl{
       font-family: 'Karla', sans-serif;
       font-weight: bold;
       color: #262f3c;
-  }
-
-  #notmember{
-      float: right;
-      font-family: 'Karla', sans-serif;
-      font-weight: bold;
       font-size: 12px;
-      margin-top: 15px;
-      color: #262f3c;
       cursor: pointer;
   }
 

@@ -21,9 +21,8 @@ const SigninComponent = ({ errors, touched, signInInfo }) => {
 
     }, [signInInfo.LoginError]);
 
-    const gotoSignup = () => {
-        history.push('/signup');
-    }
+    const gotoSignup = () => { history.push('/signup'); }
+    const gotoForgotpass = () => { history.push('/forgotpassword'); }
 
     return (
         <div className="signinflexcontainer">
@@ -42,11 +41,9 @@ const SigninComponent = ({ errors, touched, signInInfo }) => {
 
                         <button className="signinbtn" type="submit">Login</button>
                         <div>
-                            <Field type="checkbox" name="terms" checked={true} />
-                            <span id="remembermetext">Remember me</span>
 
-                            <span id="forgetpassword">Forget Password?</span>
-                            <span id="notmember" onClick={gotoSignup}>Not a Member? Register Now</span>
+                            <span id="notmemberl" onClick={gotoSignup}>Not a Member? Register Now</span>
+                            <span id="forgotpass" onClick={gotoForgotpass}>Forgot Password?</span>
                         </div>
                         <br /><br /><br /><br />
                         <br /><br /><br /><br />
