@@ -1,43 +1,51 @@
 import React from "react";
 import './forgotpassword.scss';
 import * as Yup from "yup";
-import { withFormik, Form, Field } from "formik";
-import { withRouter } from "react-router-dom/cjs/react-router-dom.min";
+import { Formik, Form, Field } from "formik";
 
-const ForgotPassComponent = ({ errors, touched }) => {
+const forgotPassSchema = () => {
+    return Yup.object().shape({
+        email: Yup.string().email().required("*required")
+    });
+};
+
+const ForgotPassword = () => {
+
+    const onSubmit = (values) => {
+        setTimeout(() => {
+            console.log(values);
+        }, 600);
+    };
 
     return (
         <div className="forgotflexcontainer">
             <div className="forgotformcontainer">
-                <Form>
-                    <div className="forgotinputfield-container">
-                        <h1 className="forgottitle">To recover your password fill and submit the form below</h1>
+                <Formik
+                    initialValues={{
+                        email: "",
+                    }}
+                    validationSchema={forgotPassSchema()}
+                    onSubmit={onSubmit}
+                >
+                    {({ errors, touched }) => (
+                        <Form>
+                            <div className="forgotinputfield-container">
+                                <h1 className="forgottitle">Forgot password?</h1>
 
-                        {touched.email && errors.email && <p className="forgotformerror">{errors.email}</p>}
-                        <Field type="email" placeholder="Email" name="email" />
+                                {touched.email && errors.email && <p className="forgotformerror">{errors.email}</p>}
+                                <Field type="email" placeholder="Enter your email..." name="email" />
 
-                        <button className="forgotbtn" type="submit">Submit</button>
-                        <div id="signintomember">
-                            <span>Sign-in to your Members Account</span>
-                        </div>
-                    </div>
-                </Form>
+                                <button className="forgotbtn" type="submit">Submit</button>
+                                <div id="signintomember">
+                                    <span>Sign-in to members account</span>
+                                </div>
+                            </div>
+                        </Form>
+                    )}
+                </Formik>
             </div>
         </div>
     );
 };
-
-const ForgotPassword = withRouter(withFormik({
-    mapPropsToValues({ email }) {
-        return { email: email || '' }
-    },
-    validationSchema: Yup.object().shape({
-        email: Yup.string().email().required("*required")
-    }),
-    handleSubmit(values, { props }) {
-        // console.log("heyde", values);
-    }
-})(ForgotPassComponent));
-
 
 export default ForgotPassword
