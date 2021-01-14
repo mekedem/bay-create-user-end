@@ -45,7 +45,7 @@ const SignupComponent = ({ errors, touched, signupInfo }) => {
                         <Field type="password" placeholder="Password" name="password" />
 
                         <button className="signupbtn" type="submit">Register</button>
-                        <span id="signinlink" onClick={gotoLogin}> Sign-in to your members account </span>
+                        <span id="signinlink" onClick={gotoLogin}> Sign-in to members account </span>
                     </div>
                 </Form>
 
