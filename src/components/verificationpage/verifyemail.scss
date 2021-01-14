@@ -1,0 +1,113 @@
+.verifyflexcontainer {
+    display: flex;
+    width: 100%;
+  }
+  
+  .verifyformerror {
+    color: red;
+    font-size: 13px;
+  }
+  
+  .verifyformcontainer {
+    width: 50%;
+    margin-left: 30%;
+  }
+  
+  .verifybox-container {
+    display: flex;
+  }
+  
+  .verifybox-container > p {
+    margin-left: 3%;
+    font-size: 14px;
+  }
+  
+  .verifybox-container > input {
+    width: 15px;
+    height: 15px;
+  }
+  
+  .verifyinputfield-container {
+    width: 57%;
+    padding: 16px;
+    margin-left: 7%;
+  }
+  
+  .verifytitle {
+    margin-left: 5%;
+    margin-bottom: 10%;
+    font-family: 'Karla', sans-serif;
+    text-align: center;
+  }
+  
+  /* Full-width input fields */
+  .verifyinputfield-container {
+    input[type="number"],
+    input[type="text"],
+    input[type="password"] {
+      width: 93%;
+      height: 25px;
+      padding: 15px;
+      margin: 5px 0 18px 0;
+      display: inline-block;
+      border: none;
+      background: #f2f2f2;
+      font-size: 18px;
+      &:focus {
+        background-color: #f2f2f2;
+        outline: none;
+      }
+    }
+  }
+  
+  .verifybtn:hover {
+    opacity: 1;
+  }
+  
+  .verifybtn {
+    background-color: #262f3c;
+    color: white;
+    padding: 15px;
+    margin: 5px 0 20px 0;
+    border: none;
+    cursor: pointer;
+    opacity: 0.9;
+    float: left;
+    width: 100%;
+    font-size: 18px;
+  }
+  
+  #resendcode{
+      cursor: pointer;
+      font-family: 'Karla', sans-serif;
+      color: #262f3c;
+      text-align: center;
+  }
+
+  #forgetpassword{
+      float: right;
+      font-family: 'Karla', sans-serif;
+      font-weight: bold;
+      color: #262f3c;
+  }
+
+  #notmember{
+      float: right;
+      font-family: 'Karla', sans-serif;
+      font-weight: bold;
+      font-size: small;
+      margin-top: 15px;
+      color: #262f3c;
+  }
+
+  #footerlink{
+      float: left;
+  }
+
+
+  .terms{
+      margin-left: 40px;
+      font-family: 'Karla', sans-serif;
+      font-weight: bold;
+      color: #262f3c;
+  }
