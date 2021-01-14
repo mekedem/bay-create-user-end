@@ -8,21 +8,9 @@ import "./usermgmt.scss";
 import { removeUserFromList } from "../../../API/serviceRequestAPI";
 import { ConfirmationDialog } from "../../../utilcomponents/confirmationDialogue/ConfirmationDialog";
 
-const UserManagementComponent = ({ usersList, getListofusers, totalUsers, removeUserById }) => {
+const UsersManagementItem = ({ user, removeUserById }) => {
 
-    const [pageCount, setPageCount] = useState(2);
-    const [currentPage, setCurrentPage] = useState("0");
     const [showDialogue, setShowDialogue] = useState(false);
-    const history = useHistory();
-
-    const handlePageClick = (e) => {
-        const selectedPage = e.selected;
-        setCurrentPage(selectedPage.toString());
-    };
-
-    const gotoAddNewUser = () => {
-        history.push('./signup');
-    };
 
     const dateFormatter = (d) => {
         const ddmmyy = new Date(d);
@@ -30,7 +18,12 @@ const UserManagementComponent = ({ usersList, getListofusers, totalUsers, remove
         return retdate
     }
 
+    const onDeleteDenied = () => {
+        setShowDialogue(false);
+    }
+
     const onDeleteComifrmed = (userid) => {
+        console.log(userid);
         setTimeout(() => {
             removeUserFromList(userid)
                 .then((response) => {
@@ -48,9 +41,41 @@ const UserManagementComponent = ({ usersList, getListofusers, totalUsers, remove
         }, 600);
     }
 
-    const onDeleteDenied = () => {
-        setShowDialogue(false);
-    }
+    return (
+        <tr className="department-item-container">
+            <td className="item-name"> {user.fullName}</td>
+            <td className="item-date">{user.phone}</td>
+            <td className="item-description">{user.email}</td>
+            <td className="item-date">{dateFormatter(user.createdAt)}</td>
+            <td className="item-action"></td>
+            <td className="item-action"> <button className="actionbuttons" onClick={() => { setShowDialogue(true) }}> <MdDelete /> </button> </td>
+            {showDialogue && <ConfirmationDialog
+                show={setShowDialogue}
+                message="Are you sure you want to remove this user?"
+                cancelBtnTitle="Cancel"
+                comfirmBtnTitle="Remove"
+                onComfirmation={() => { onDeleteComifrmed(user._id) }}
+                onDeny={onDeleteDenied}
+            />}
+        </tr>
+    );
+};
+
+
+const UserManagementComponent = ({ usersList, getListofusers, totalUsers, removeUserById }) => {
+
+    const [pageCount, setPageCount] = useState(2);
+    const [currentPage, setCurrentPage] = useState("0");
+    const history = useHistory();
+
+    const handlePageClick = (e) => {
+        const selectedPage = e.selected;
+        setCurrentPage(selectedPage.toString());
+    };
+
+    const gotoAddNewUser = () => {
+        history.push('./signup');
+    };
 
     React.useEffect(() => {
         getListofusers({ pagevalue: currentPage });
@@ -77,22 +102,11 @@ const UserManagementComponent = ({ usersList, getListofusers, totalUsers, remove
                         <td className="item-action"></td>
                     </tr>
                     {usersList.map((user, index) => (
-                        <tr key={index} className="department-item-container">
-                            <td className="item-name"> {user.fullName}</td>
-                            <td className="item-date">{user.phone}</td>
-                            <td className="item-description">{user.email}</td>
-                            <td className="item-date">{dateFormatter(user.createdAt)}</td>
-                            <td className="item-action"></td>
-                            <td className="item-action"> <button className="actionbuttons" onClick={() => { setShowDialogue(true) }}> <MdDelete /> </button> </td>
-                            {showDialogue && <ConfirmationDialog
-                                show={setShowDialogue}
-                                message="Are you sure you want to remove this user?"
-                                cancelBtnTitle="Cancel"
-                                comfirmBtnTitle="Remove"
-                                onComfirmation={() => { onDeleteComifrmed(user._id) }}
-                                onDeny={onDeleteDenied}
-                            />}
-                        </tr>
+                        <UsersManagementItem
+                            key={index}
+                            user={user}
+                            removeUserById={removeUserById}
+                        />
                     ))}
                 </tbody>
             </table>
