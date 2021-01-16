@@ -1,7 +1,8 @@
 import "../constants/constants"
 import {
     LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, SIGNUP_FAILURE,
-    SIGNUP_REQUEST, SIGNUP_SUCCESS, INITIALDATA_FETCHED, LOGOUT_SUCCESS
+    SIGNUP_REQUEST, SIGNUP_SUCCESS, INITIALDATA_FETCHED, LOGOUT_SUCCESS,
+    UPDATED_LOGIN_SUCCESS
 } from "../constants/constants";
 
 export const signupRequested = ({ email, fullname, password, affiliationcode, phonenumber }, history) => ({
@@ -47,6 +48,13 @@ export const signinResponse = (data) => ({
     payload: {
         data,
     },
+});
+
+export const updatedSigninResponse = (data) => ({
+    type: UPDATED_LOGIN_SUCCESS,
+    payload: {
+        data,
+    }
 });
 
 export const signinError = (message) => ({
