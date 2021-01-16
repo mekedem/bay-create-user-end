@@ -5,6 +5,7 @@ import Login from "./components/loginpage/loginpage";
 import ForgotPassword from "./components/forgotpassword/forgotpassword";
 import MainPanel from "./components/mainpanel/mainpanel";
 import VerifyEmail from "./components/verificationpage/verifyemail";
+import NewPassword from "./components/newpassword/newpassword";
 import ProtectedRoute from "./protectedRoutes";
 
 
@@ -29,6 +30,11 @@ const App = () => {
             path="/forgotpassword"
             name="forgotpassword"
             component={(props) => <ForgotPassword {...props} />}
+          />
+          <Route
+            path="/setnewpassword"
+            name="setnewpassword"
+            component={(props) => <NewPassword {...props} />}
           />
           <Route
             path="/verifyemail"

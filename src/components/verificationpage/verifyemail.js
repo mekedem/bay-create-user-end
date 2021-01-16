@@ -2,6 +2,9 @@ import React from "react";
 import './verifyemail.scss';
 import * as Yup from "yup";
 import { Formik, Form, Field } from "formik";
+import { OTP_REGISTERY } from "../../constants/constants";
+import { verifyforgotpasswordotp } from "../../API/authAPI";
+import { useHistory } from "react-router-dom";
 
 const verifySchema = () => {
     return Yup.object().shape({
@@ -10,11 +13,28 @@ const verifySchema = () => {
 };
 
 const VerifyEmail = () => {
+    const history = useHistory();
 
     const onSubmit = (values) => {
-        setTimeout(() => {
-            console.log(values);
-        }, 600);
+        if (JSON.parse(localStorage.getItem(OTP_REGISTERY))) {
+
+        }
+        else {
+            setTimeout(() => {
+                verifyforgotpasswordotp(values.verificationCode)
+                    .then((response) => {
+                        if (response.success) {
+                            localStorage.setItem("sessionId", response.data.sessionId);
+                            history.push("./setnewpassword");
+                        }
+                    })
+                    .catch((error) => {
+                        alert("error while verifying... retry");
+                        console.log(error);
+                    })
+                    .then(() => { });
+            }, 600);
+        }
     };
 
     return (
@@ -33,7 +53,7 @@ const VerifyEmail = () => {
                                 <h1 className="verifytitle">Verify Email</h1>
 
                                 {touched.verificationCode && errors.verificationCode && <p className="verifyformerror">{errors.verificationCode}</p>}
-                                <Field type="number" placeholder="Enter code" name="verificationCode" />
+                                <Field type="text" placeholder="Enter code" name="verificationCode" />
 
                                 <button className="verifybtn" type="submit">Verify</button>
                                 <div id="resendcode">

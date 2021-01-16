@@ -75,7 +75,7 @@ const Signup = withRouter(withFormik({
 
     handleSubmit(values, { props }) {
         // console.log("heyde", values);
-        props.dispatch(signupRequested(values));
+        props.dispatch(signupRequested(values, props.history));
     }
 
 })(SignupComponent));

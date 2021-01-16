@@ -2,6 +2,10 @@ import React from "react";
 import './forgotpassword.scss';
 import * as Yup from "yup";
 import { Formik, Form, Field } from "formik";
+import { userforgetspassword } from '../../API/authAPI';
+import { useHistory } from "react-router-dom";
+import { OTP_REGISTERY } from "../../constants/constants";
+
 
 const forgotPassSchema = () => {
     return Yup.object().shape({
@@ -10,10 +14,27 @@ const forgotPassSchema = () => {
 };
 
 const ForgotPassword = () => {
+    const history = useHistory();
+
+    const gotoEmailVerification = () => {
+        localStorage.setItem(OTP_REGISTERY, false);
+        history.push("./verifyemail");
+    }
 
     const onSubmit = (values) => {
         setTimeout(() => {
-            console.log(values);
+            userforgetspassword(values.email)
+                .then((response) => {
+                    if (response.success) {
+                        console.log("IT IS A SUCCESS");
+                        gotoEmailVerification();
+                    }
+                })
+                .catch((error) => {
+                    alert("error while submitting... retry");
+                    console.log(error);
+                })
+                .then(() => { });
         }, 600);
     };
 
@@ -36,9 +57,7 @@ const ForgotPassword = () => {
                                 <Field type="email" placeholder="Enter your email..." name="email" />
 
                                 <button className="forgotbtn" type="submit">Submit</button>
-                                <div id="signintomember">
-                                    <span>Sign-in to members account</span>
-                                </div>
+
                             </div>
                         </Form>
                     )}

@@ -1,4 +1,4 @@
-import { put, takeLatest, takeEvery, call } from "redux-saga/effects";
+import { put, takeLatest, call } from "redux-saga/effects";
 import { signupuser, signinuser } from "../API/authAPI";
 import { signupResponse, signupError, signinResponse, signinError } from "../actions/authActions";
 import "../constants/constants";
@@ -10,6 +10,8 @@ const signupRequestSaga = function* (action) {
         const response = yield call(signupuser, userCredential);
         if (response.success) {
             yield put(signupResponse(response.data));
+            localStorage.setItem(OTP_REGISTERY, true);
+            userCredential.history.push("/verifyemail");
         } else yield put(signupError(response.message));
     } catch (error) {
         console.log("Connection Error happened", error);

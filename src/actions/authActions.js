@@ -4,14 +4,15 @@ import {
     SIGNUP_REQUEST, SIGNUP_SUCCESS, INITIALDATA_FETCHED, LOGOUT_SUCCESS
 } from "../constants/constants";
 
-export const signupRequested = ({ email, fullname, password, affiliationcode, phonenumber }) => ({
+export const signupRequested = ({ email, fullname, password, affiliationcode, phonenumber }, history) => ({
     type: SIGNUP_REQUEST,
     payload: {
         email: email,
         fullName: fullname,
         password: password,
         affiliationCode: affiliationcode,
-        phone: phonenumber
+        phone: phonenumber,
+        history,
     },
 });
 
