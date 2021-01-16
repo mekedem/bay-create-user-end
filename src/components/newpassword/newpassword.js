@@ -1,9 +1,11 @@
 import React from "react";
+import { connect } from "react-redux";
 import './newpassword.scss';
 import * as Yup from "yup";
 import { Formik, Form, Field } from "formik";
 import { useHistory } from "react-router-dom";
 import { setthenewpassword } from "../../API/authAPI";
+import { updatedSigninResponse } from "../../actions/authActions";
 
 const newPassSchema = () => {
     return Yup.object().shape({
@@ -12,7 +14,7 @@ const newPassSchema = () => {
     });
 };
 
-const NewPassword = () => {
+const NewPassword = ({ newlogin }) => {
     const history = useHistory();
 
     const onSubmit = (values) => {
@@ -20,8 +22,7 @@ const NewPassword = () => {
             setthenewpassword(values.password)
                 .then((response) => {
                     if (response.success) {
-                        // signinResponse
-                        console.log(response.data);
+                        newlogin(response.data);
                         history.push("/");
                     }
                 })
@@ -66,4 +67,10 @@ const NewPassword = () => {
     );
 };
 
-export default NewPassword
+const mapDispatchToProps = (dispatch) => ({
+    newlogin: (data) => {
+        dispatch(updatedSigninResponse(data));
+    }
+});
+
+export default connect(null, mapDispatchToProps)(NewPassword);
