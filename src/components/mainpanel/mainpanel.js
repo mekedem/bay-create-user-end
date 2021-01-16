@@ -8,7 +8,7 @@ import { getInitialData } from "../../API/serviceRequestAPI";
 import { logoutuser } from "../../API/authAPI";
 import { initialDataFetched, logoutUserAction } from "../../actions/authActions";
 import "./mainpanel.scss";
-import { USER_TOKEN } from "../../constants/constants";
+import { USER_TOKEN, OTP_REGISTERY } from "../../constants/constants";
 
 
 const MainPanel = ({ usersRole, getInitData, logmeout, isInitialDataFetched }, props) => {
@@ -33,6 +33,10 @@ const MainPanel = ({ usersRole, getInitData, logmeout, isInitialDataFetched }, p
         const initdata = await getInitialData();
         if (initdata.success) {
             getInitData(initdata.data);
+            if (initdata.data.user_info.verified === false) {
+                localStorage.setItem(OTP_REGISTERY, true);
+                history.push("./verifyemail");
+            }
         }
         else {
             // sth happened 
