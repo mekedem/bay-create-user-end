@@ -17,8 +17,10 @@ const initialState = {
 const authenticationReducer = (state = initialState, action) => {
     switch (action.type) {
         case SIGNUP_SUCCESS:
+            localStorage.setItem(USER_TOKEN, action.payload.data.token);
+            alert(action.payload.data.message + "");
             return {
-                user_Info: action.payload.data,
+                user_Info: state.user_Info,
                 ErrorMessage: "",
                 initialData: state.initialData,
                 statusList: state.statusList,

@@ -8,3 +8,4 @@ export const LOGOUT_URL = "users/account/logout";
 export const FORGOTPASSWORD_URL = "users/account/forgotPassword";
 export const FORGOTPASSWORDOTP_URL = "verify";
 export const FORGOTPASSWORDCOMPLETE_URL = "complete";
+export const REGISTEROTP_URL = "users/account/verify";

@@ -1,4 +1,4 @@
-import { baseURL, SIGNUP_URL, LOGIN_URL, LOGOUT_URL, FORGOTPASSWORD_URL, FORGOTPASSWORDOTP_URL, FORGOTPASSWORDCOMPLETE_URL } from './API_URLS';
+import { baseURL, SIGNUP_URL, LOGIN_URL, LOGOUT_URL, FORGOTPASSWORD_URL, FORGOTPASSWORDOTP_URL, FORGOTPASSWORDCOMPLETE_URL, REGISTEROTP_URL } from './API_URLS';
 import { USER_TOKEN } from "../constants/constants";
 
 export const signupuser = async (signupCredentials) => {
@@ -62,6 +62,22 @@ export const userforgetspassword = async (email) => {
     };
     try {
         let response = await fetch(`${baseURL}/${FORGOTPASSWORD_URL}`, requestOptions)
+        return await response.json();
+    }
+    catch {
+        throw new Error("Unexpected error!!!");
+    }
+}
+
+export const verifyregistryemail = async (otp) => {
+    const token = localStorage.getItem(USER_TOKEN);
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': token },
+        body: JSON.stringify({ otp: otp })
+    };
+    try {
+        let response = await fetch(`${baseURL}/${REGISTEROTP_URL}`, requestOptions)
         return await response.json();
     }
     catch {

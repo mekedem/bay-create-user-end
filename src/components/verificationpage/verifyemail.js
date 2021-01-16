@@ -3,7 +3,7 @@ import './verifyemail.scss';
 import * as Yup from "yup";
 import { Formik, Form, Field } from "formik";
 import { OTP_REGISTERY } from "../../constants/constants";
-import { verifyforgotpasswordotp } from "../../API/authAPI";
+import { verifyforgotpasswordotp, verifyregistryemail } from "../../API/authAPI";
 import { useHistory } from "react-router-dom";
 
 const verifySchema = () => {
@@ -17,7 +17,19 @@ const VerifyEmail = () => {
 
     const onSubmit = (values) => {
         if (JSON.parse(localStorage.getItem(OTP_REGISTERY))) {
-
+            setTimeout(() => {
+                verifyregistryemail(values.verificationCode)
+                    .then((response) => {
+                        if (response.success) {
+                            history.push("./");
+                        }
+                    })
+                    .catch((error) => {
+                        alert("error while verifying... retry");
+                        console.log(error);
+                    })
+                    .then(() => { });
+            }, 600);
         }
         else {
             setTimeout(() => {
