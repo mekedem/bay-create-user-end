@@ -77,10 +77,12 @@ const ServiceRequestComponent = ({ requestServiceFirst, requestsList, addRequest
 
     return (
         <div>
+
             <div>
                 {role && <button className="buttonadd" onClick={() => { setShowModal(true) }}>+ add</button>}
                 {showModal && <RequestServiceModal handleClose={setShowModal} addRequest={addRequest} />}
             </div>
+
             <div className="items-title"><h2>Service Requests</h2></div>
             <hr />
             <table>
@@ -91,7 +93,11 @@ const ServiceRequestComponent = ({ requestServiceFirst, requestsList, addRequest
                         <td className="item-description"><strong>Description</strong></td>
                         <td className="item-file"><strong>Files?</strong></td>
                         <td className="item-description"><strong>Status</strong></td>
-                        <td className="item-action"></td>
+                        <td className="item-action">
+                            <select className="requestStatus" component="select" name="status">
+                                <option value="zuma">all</option>
+                            </select>
+                        </td>
                     </tr>
                     {requestsList.map((req, index) => (
                         <ServiceRequestItem
