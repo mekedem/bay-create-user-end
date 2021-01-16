@@ -2,7 +2,7 @@ import "../constants/constants";
 import {
     LOGIN_FAILURE, LOGIN_SUCCESS, SIGNUP_FAILURE,
     SIGNUP_SUCCESS, USER_TOKEN, INITIALDATA_FETCHED,
-    LOGOUT_SUCCESS
+    LOGOUT_SUCCESS, UPDATED_LOGIN_SUCCESS
 } from "../constants/constants";
 
 const initialState = {
@@ -42,6 +42,16 @@ const authenticationReducer = (state = initialState, action) => {
                 user_Info: action.payload.data.user_info,
                 ErrorMessage: "",
                 initialData: true,
+                statusList: action.payload.data.status,
+                LoginError: "",
+                SignupError: ""
+            };
+
+        case UPDATED_LOGIN_SUCCESS:
+            return {
+                user_Info: action.payload.data.user_info,
+                ErrorMessage: "",
+                initialData: state.initialData,
                 statusList: action.payload.data.status,
                 LoginError: "",
                 SignupError: ""
