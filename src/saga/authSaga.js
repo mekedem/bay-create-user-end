@@ -1,8 +1,7 @@
 import { put, takeLatest, call } from "redux-saga/effects";
 import { signupuser, signinuser } from "../API/authAPI";
 import { signupResponse, signupError, signinResponse, signinError } from "../actions/authActions";
-import "../constants/constants";
-import { LOGIN_REQUEST, SIGNUP_REQUEST } from "../constants/constants";
+import { LOGIN_REQUEST, SIGNUP_REQUEST, OTP_REGISTERY } from "../constants/constants";
 
 const signupRequestSaga = function* (action) {
     const userCredential = action.payload;
