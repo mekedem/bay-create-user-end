@@ -3,7 +3,7 @@ import './verifyemail.scss';
 import * as Yup from "yup";
 import { Formik, Form, Field } from "formik";
 import { OTP_REGISTERY } from "../../constants/constants";
-import { verifyforgotpasswordotp, verifyregistryemail } from "../../API/authAPI";
+import { verifyforgotpasswordotp, verifyregistryemail, resendverificationcode } from "../../API/authAPI";
 import { useHistory } from "react-router-dom";
 
 const verifySchema = () => {
@@ -49,6 +49,22 @@ const VerifyEmail = () => {
         }
     };
 
+    const resendCode = () => {
+        setTimeout(() => {
+            resendverificationcode()
+                .then((response) => {
+                    if (response.success) {
+                        alert(response.data.message);
+                    }
+                })
+                .catch((error) => {
+                    alert("error while verifying... retry");
+                    console.log(error);
+                })
+                .then(() => { });
+        }, 600);
+    }
+
     return (
         <div className="verifyflexcontainer">
             <div className="verifyformcontainer">
@@ -69,7 +85,7 @@ const VerifyEmail = () => {
 
                                 <button className="verifybtn" type="submit">Verify</button>
                                 <div id="resendcode">
-                                    <span>resend code again</span>
+                                    <span onClick={resendCode}>resend code again</span>
                                 </div>
                             </div>
                         </Form>
