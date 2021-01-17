@@ -1,9 +1,10 @@
 import { GET_SERVICE_REQUEST, SERVICE_REQUEST_RESPONSE, SERVICE_REQUEST_ERROR, ADD_SERVICE_REQUEST, UPDATE_SERVICE_REQUEST } from "../constants/constants";
 
-export const getServiceRequestAction = ({ pagevalue }) => ({
+export const getServiceRequestAction = ({ pagevalue, status }) => ({
     type: GET_SERVICE_REQUEST,
     payload: {
         pagevalue: pagevalue,
+        status: status
     },
 });
 

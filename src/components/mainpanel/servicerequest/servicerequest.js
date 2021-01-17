@@ -59,20 +59,25 @@ const ServiceRequestItem = ({ fullName, createdAt, description, files, status, r
 };
 
 
-const ServiceRequestComponent = ({ requestServiceFirst, requestsList, addRequest, role, totalRequest, updateRequest }) => {
+const ServiceRequestComponent = ({ requestServiceFirst, requestsList, addRequest, role, totalRequest, updateRequest, statusList }) => {
 
     const [showModal, setShowModal] = useState(false);
     const [pageCount, setPageCount] = useState(2);
     const [currentPage, setCurrentPage] = useState("0");
+    const [statusState, setStatusState] = useState("");
 
     React.useEffect(() => {
-        requestServiceFirst({ pagevalue: currentPage });
+        requestServiceFirst({ pagevalue: currentPage, status: statusState });
         setPageCount(Math.ceil(totalRequest / 10));
-    }, [currentPage, totalRequest]);
+    }, [currentPage, statusState, totalRequest]);
 
     const handlePageClick = (e) => {
         const selectedPage = e.selected;
         setCurrentPage(selectedPage.toString());
+    };
+
+    const changeStatus = (e) => {
+        setStatusState(e.target.value);
     };
 
     return (
@@ -94,8 +99,11 @@ const ServiceRequestComponent = ({ requestServiceFirst, requestsList, addRequest
                         <td className="item-file"><strong>Files?</strong></td>
                         <td className="item-description"><strong>Status</strong></td>
                         <td className="item-action">
-                            <select className="requestStatus" component="select" name="status">
-                                <option value="zuma">all</option>
+                            <select className="requestStatus" component="select" name="status" onChange={changeStatus} value={statusState}>
+                                <option value="">all</option>
+                                {statusList.map((statusitem) => {
+                                    return <option key={statusitem._id} value={statusitem._id}>{statusitem.description}</option>
+                                })}
                             </select>
                         </td>
                     </tr>
@@ -136,7 +144,8 @@ const ServiceRequestComponent = ({ requestServiceFirst, requestsList, addRequest
 const mapStateToProps = (state) => {
     return {
         requestsList: state.serviceRequestRed.requestData,
-        totalRequest: state.serviceRequestRed.total
+        totalRequest: state.serviceRequestRed.total,
+        statusList: state.authenticationRed.statusList
     };
 };
 

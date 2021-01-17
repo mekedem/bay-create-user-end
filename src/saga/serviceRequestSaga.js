@@ -5,9 +5,9 @@ import { GET_SERVICE_REQUEST } from "../constants/constants";
 import { serviceResponse, serviceResponseError } from "../actions/serviceReqAction";
 
 const serviceRequestSaga = function* (action) {
-    const pagevalue = action.payload.pagevalue;
+    const pagefilter = action.payload;
     try {
-        const response = yield call(getServiceRequests, pagevalue);
+        const response = yield call(getServiceRequests, pagefilter);
         if (response.success) {
             yield put(serviceResponse(response.data.requests, response.data.total));
         } else yield put(serviceResponseError(response.message));

@@ -2,9 +2,12 @@ import axios from "axios";
 import { baseURL, GETSERVICEREQUEST_URL, GETLISTOFUSERS_URL, GETINITIALDATA_URL } from "../API/API_URLS";
 import { USER_TOKEN } from "../constants/constants";
 
-export const getServiceRequests = (pagevalue) => {
+export const getServiceRequests = (pagefilter) => {
     const token = localStorage.getItem(USER_TOKEN);
-    const url = baseURL + `/${GETSERVICEREQUEST_URL}?page=${pagevalue}`;
+    const pagevalue = pagefilter.pagevalue;
+    const status = pagefilter.status;
+
+    const url = baseURL + `/${GETSERVICEREQUEST_URL}?page=${pagevalue}&status=${status}`;
     return axios.get(url, { headers: { Authorization: token, } }).then(d => d.data);
 };
 
