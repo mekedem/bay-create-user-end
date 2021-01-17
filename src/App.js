@@ -32,7 +32,7 @@ const App = () => {
             name="forgotpassword"
             component={(props) => <ForgotPassword {...props} />}
           />
-          <Route
+          <ProtectedRoute
             path="/changepassword"
             name="changepassword"
             component={(props) => <ChangePassword {...props} />}
