@@ -19,6 +19,12 @@ const MainPanel = ({ usersRole, getInitData, logmeout, isInitialDataFetched }, p
     React.useEffect(() => {
         if (localStorage.getItem(USER_TOKEN)) {
             if (!isInitialDataFetched) pullInitialData();
+            if (isInitialDataFetched) {
+                if (usersRole.user_Info.verified === false) {
+                    localStorage.setItem(OTP_REGISTERY, true);
+                    history.push("./verifyemail");
+                }
+            }
         }
         if (usersRole.user_Info.role === "admin") setIsUser(false);
         // if (usersRole.initialData) { }
@@ -33,10 +39,10 @@ const MainPanel = ({ usersRole, getInitData, logmeout, isInitialDataFetched }, p
         const initdata = await getInitialData();
         if (initdata.success) {
             getInitData(initdata.data);
-            if (initdata.data.user_info.verified === false) {
-                localStorage.setItem(OTP_REGISTERY, true);
-                history.push("./verifyemail");
-            }
+            // if (initdata.data.user_info.verified === false) {
+            //     localStorage.setItem(OTP_REGISTERY, true);
+            //     history.push("./verifyemail");
+            // }
         }
         else {
             // sth happened 
@@ -52,6 +58,8 @@ const MainPanel = ({ usersRole, getInitData, logmeout, isInitialDataFetched }, p
         }
     }
 
+    const gotoChangepass = () => { history.push('/changepassword'); }
+
     return (
         !initialDataFetched ? <div>Loading...</div> :
             <div className="wrapper">
@@ -60,7 +68,9 @@ const MainPanel = ({ usersRole, getInitData, logmeout, isInitialDataFetched }, p
                     <Link className={location.pathname == "/" ? "onsidelink" : "notonsidelink"} to="/">Home</Link>
                     {!isUser ? <Link className={location.pathname == "/usermanagement" ? "onsidelink" : "notonsidelink"} to="/usermanagement">User Management</Link> : ""}
                     <Link className={location.pathname == "/servicerequest" ? "onsidelink" : "notonsidelink"} to="/servicerequest">Service Requests</Link>
+
                     <button id="logoutbutton" onClick={logOutOfhere}> Logout </button>
+                    <button id="changepasswordbutton" onClick={gotoChangepass}> Change Password </button>
                 </div>
 
                 <div className="main">

@@ -23,7 +23,6 @@ const SigninComponent = ({ errors, touched, signInInfo }) => {
 
     const gotoSignup = () => { history.push('/signup'); }
     const gotoForgotpass = () => { history.push('/forgotpassword'); }
-    const gotoChangepass = () => { history.push('/changepassword'); }
 
     return (
         <div className="signinflexcontainer">
@@ -45,7 +44,6 @@ const SigninComponent = ({ errors, touched, signInInfo }) => {
 
                             <span id="notmemberl" onClick={gotoSignup}>Not a Member? Register Now</span>
                             <span id="forgotpass" onClick={gotoForgotpass}>Forgot Password?</span>
-                            <span id="changepass" onClick={gotoChangepass}>Change password</span>
                         </div>
                         <br /><br /><br /><br />
                         <br /><br /><br /><br />
