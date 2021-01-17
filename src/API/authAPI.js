@@ -1,4 +1,4 @@
-import { baseURL, SIGNUP_URL, LOGIN_URL, LOGOUT_URL, FORGOTPASSWORD_URL, FORGOTPASSWORDOTP_URL, FORGOTPASSWORDCOMPLETE_URL, REGISTEROTP_URL, RESEND_VERIFICATION } from './API_URLS';
+import { baseURL, SIGNUP_URL, LOGIN_URL, LOGOUT_URL, FORGOTPASSWORD_URL, FORGOTPASSWORDOTP_URL, FORGOTPASSWORDCOMPLETE_URL, REGISTEROTP_URL, RESEND_VERIFICATION, CHANGEPASSWORD_URL } from './API_URLS';
 import { USER_TOKEN } from "../constants/constants";
 
 export const signupuser = async (signupCredentials) => {
@@ -131,4 +131,20 @@ export const resendverificationcode = async () => {
         throw new Error("Unexpected error!!!");
     }
 
+}
+
+export const changepasswordnormally = async (passwords) => {
+    const token = localStorage.getItem(USER_TOKEN);
+    const requestOptions = {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', 'Authorization': token },
+        body: JSON.stringify({ oldPassword: passwords.oldPassword, newPassword: passwords.newPassword })
+    };
+    try {
+        let response = await fetch(`${baseURL}/${CHANGEPASSWORD_URL}`, requestOptions)
+        return await response.json();
+    }
+    catch {
+        throw new Error("Unexpected error!!!");
+    }
 }

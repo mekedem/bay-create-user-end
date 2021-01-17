@@ -5,6 +5,7 @@ export const GETSERVICEREQUEST_URL = "requests";
 export const GETLISTOFUSERS_URL = "users";
 export const GETINITIALDATA_URL = "users/account/initialData";
 export const LOGOUT_URL = "users/account/logout";
+export const CHANGEPASSWORD_URL = "users/account/password";
 export const FORGOTPASSWORD_URL = "users/account/forgotPassword";
 export const FORGOTPASSWORDOTP_URL = "verify";
 export const FORGOTPASSWORDCOMPLETE_URL = "complete";
