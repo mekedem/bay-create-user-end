@@ -65,7 +65,7 @@ const MainPanel = ({ usersRole, getInitData, logmeout, isInitialDataFetched }, p
             <div className="wrapper">
                 <div className="sidenav">
                     <img className="logoimg" src="./bayerlogo.png" width="200" height="100" />
-                    <Link className={location.pathname == "/" ? "onsidelink" : "notonsidelink"} to="/">Home</Link>
+                    <Link className={location.pathname == "/app" ? "onsidelink" : "notonsidelink"} to="/app">Home</Link>
                     {!isUser ? <Link className={location.pathname == "/usermanagement" ? "onsidelink" : "notonsidelink"} to="/usermanagement">User Management</Link> : ""}
                     <Link className={location.pathname == "/servicerequest" ? "onsidelink" : "notonsidelink"} to="/servicerequest">Service Requests</Link>
 
@@ -75,7 +75,7 @@ const MainPanel = ({ usersRole, getInitData, logmeout, isInitialDataFetched }, p
 
                 <div className="main">
                     <Switch>
-                        <Route exact path="/">
+                        <Route exact path="/app">
                             <HomePage />
                         </Route>
                         <Route path="/usermanagement">

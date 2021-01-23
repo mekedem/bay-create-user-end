@@ -23,7 +23,7 @@ const NewPassword = ({ newlogin }) => {
                 .then((response) => {
                     if (response.success) {
                         newlogin(response.data);
-                        history.push("/");
+                        history.push("/app");
                     }
                 })
                 .catch((error) => {

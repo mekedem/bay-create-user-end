@@ -23,7 +23,7 @@ const signinRequestSaga = function* (action) {
         const response = yield call(signinuser, userCredential);
         if (response.success) {
             yield put(signinResponse(response.data));
-            userCredential.history.push("/");
+            userCredential.history.push("/app");
         } else yield put(signinError(response.message));
     } catch (error) {
         console.log("Connection Error happened", error);

@@ -21,7 +21,7 @@ const VerifyEmail = () => {
                 verifyregistryemail(values.verificationCode)
                     .then((response) => {
                         if (response.success) {
-                            history.push("/");
+                            history.push("/app");
                         }
                     })
                     .catch((error) => {

@@ -48,7 +48,7 @@ const App = () => {
             component={(props) => <VerifyEmail {...props} />}
           />
           <ProtectedRoute
-            path="/"
+            path="/app"
             name="home"
             component={(props) => <MainPanel {...props} />}
           />
